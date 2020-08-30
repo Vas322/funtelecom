@@ -1,0 +1,25 @@
+{% extends 'funsite/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+
+{% block title %} Главная страница {% endblock title %}
+
+{% block content %}
+
+<p>Наши бренды</p>
+
+{% for art in art_list %}
+<a href="{% url 'detail_article' pk=art.pk %}">
+	<div>{{ art.created_date }}</div>
+	{% if art.image %}
+	<div><img src=" {{ art.image.url }}"></div>
+	{% else %}
+	<img src=" {{ art.image.url }}" class="main-image">
+	{% endif %}
+	<div>{{ art.title }}</div>
+</a>
+{% endfor %}
+
+
+{% endblock content %}

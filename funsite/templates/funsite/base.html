@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+  <meta name="viewport" 
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Главная страница</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'funsite/style.css' %}">
+
+</head>
+
+<body>
+
+  <div class="header">    
+    <div class="logo"><a href="/"><img src="{% static 'funsite/Logo_Kodland.png' %}" alt="logo">
+    </a></div>
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+      <p class="text-right font-italic">&copy; By Dmitrochenko, 2020г.</p>    
+    </footer>
+  </body>
+  </html>
