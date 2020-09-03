@@ -11,10 +11,11 @@ def get_timestamp_path(instance, filename):
 
 class Brand(models.Model):
     """The model describes the brand. Which will be display on the page."""
-    name = models.CharField(max_length=200, verbose_name='Название бренда')
-    text = models.TextField(verbose_name='Описание бренда')
+    name = models.CharField(max_length=200, verbose_name='Название бренда*')
+    text = models.TextField(verbose_name='Описание бренда*')
+    link_site = models.CharField(max_length=200, verbose_name='Ссылка на сайт')
     image_brand = models.ImageField(blank=True, upload_to=get_timestamp_path,
-                                    verbose_name='Загрузить изображение')
+                                    verbose_name='Загрузить изображение*')
 
     def save(self):
         super().save()
@@ -26,6 +27,6 @@ class Brand(models.Model):
             img.save(self.image_brand.path)
 
     class Meta:
-        """Attribute allows you to use the plural form of 'Articles'"""
+        """Attribute allows you to use the plural form of 'Brands'"""
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'

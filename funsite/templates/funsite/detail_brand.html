@@ -2,19 +2,17 @@
 {% load thumbnail %}
 {% load static %}
 
-
-{% block title %} Бренд {% endblock title %}
+{% block title %} Funtelecom - {{ brand.name }} {% endblock title %}
 
 {% block content %}
 
-<div class="col-sm">
 	<h2 class="detail-title"> {{ brand.name }}</h2>
 	<div class="image-detail"> <img src=" {{ brand.image_brand.url }}"></div>
 	<div class="">				
 		<p>{% autoescape off %}{{ brand.text}}{% endautoescape %}</p>
-	</div>				
-</div>
-
-
+	</div>
+	<div>
+		<a href="{{ brand.link_site }}">Ссылка на сайт</a>
+	</div>
 
 {% endblock content %}
