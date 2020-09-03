@@ -3,6 +3,7 @@
 {% load static %}
 
 
+
 {% block title %} Главная страница {% endblock title %}
 
 {% block content %}
@@ -10,13 +11,14 @@
 <p>Наши бренды</p>
 
 {% for brand in brand_list %}
-	{% if brand.image_brand %}
-	<div><img src=" {{ brand.image_brand.url }}"></div>
-	{% else %}
-	<img src=" {{ brand.image_brand.url }}" class="main-image">
-	{% endif %}
-	<div>{{ brand.text }}</div>
-{% endfor %}
 
+	<div>
+		<a href="{% url 'detail_brand' pk=brand.pk %}">
+			<img src=" {{ brand.image_brand.url }}">
+		</a>
+	</div>
+	<hr>
+	
+{% endfor %}
 
 {% endblock content %}
