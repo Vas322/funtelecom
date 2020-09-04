@@ -24,3 +24,10 @@ def detail_news(request, pk):
     news = get_object_or_404(News, pk=pk)
     context = {'news': news}
     return render(request, 'funsite/detail_news.html', context)
+
+
+def all_news(request):
+    """Controller that displays the all news on page"""
+    news_list = News.objects.order_by('-created_date')
+    context = {'news_list': news_list}
+    return render(request, "funsite/all_news.html", context)

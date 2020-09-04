@@ -1,0 +1,23 @@
+{% extends 'funsite/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %} Funtelecom - Все новости {% endblock title %}
+
+{% block content %}
+
+<h2>Новости</h2>
+
+{% for news in news_list %}
+
+	<div>
+		<a href="{% url 'detail_news' pk=news.pk %}">
+			<img src=" {{ news.image_news.url }}">
+		</a>
+	</div>
+<br>
+	
+{% endfor %}
+<hr>
+
+{% endblock content %}
