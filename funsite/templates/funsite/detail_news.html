@@ -1,0 +1,16 @@
+{% extends 'funsite/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %} Funtelecom - {{ news.title }} {% endblock title %}
+
+{% block content %}
+
+	<h2 class="detail-title"> {{ news.title }}</h2>
+	<div class="image-detail"> <img src=" {{ news.image_news.url }}"></div>
+	<div class="">				
+		<p>{% autoescape off %}{{ news.text}}{% endautoescape %}</p>
+	</div>
+	<p>Дата публикации: {{ news.created_date|date:"d-M-Y" }}</p>
+
+{% endblock content %}

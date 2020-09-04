@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<p>Наши бренды</p>
+<h2>Наши бренды</h2>
 
 {% for brand in brand_list %}
 
@@ -15,8 +15,24 @@
 			<img src=" {{ brand.image_brand.url }}">
 		</a>
 	</div>
-	<hr>
+	<br>
 	
 {% endfor %}
+<br><hr>
+
+<h2>Новости</h2>
+
+{% for news in news_list %}
+
+	<div>
+		<a href="{% url 'detail_news' pk=news.pk %}">
+			<img src=" {{ news.image_news.url }}">
+		</a>
+	</div>
+<br>
+	
+{% endfor %}
+<a href="">Все новости</a>
+<hr>
 
 {% endblock content %}
