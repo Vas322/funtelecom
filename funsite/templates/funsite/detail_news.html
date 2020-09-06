@@ -5,7 +5,8 @@
 {% block title %} Funtelecom - {{ news.title }} {% endblock title %}
 
 {% block content %}
-	<a href="{% url 'all_news' %}"><h4>Новости</a> - {{ news.title }}</h4>
+	<h5><a href="{% url 'index' %}">Главная страница - </a>
+	<a href="{% url 'all_news' %}">Новости</a> - {{ news.title }}</h5>
 	<h2 class="detail-title"> {{ news.title }}</h2>
 	<div class="image-detail"> <img src=" {{ news.image_news.url }}"></div>
 	<div class="">				

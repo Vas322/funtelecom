@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from funsite.models import Brand, News
+from funsite.models import Brand, News, Carousel
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -29,3 +29,18 @@ class NewsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(News, NewsAdmin)
+
+
+class CarouselAdmin(admin.ModelAdmin):
+    """Displaying a Carousel in the admin panel"""
+    fieldsets = [
+        ('Введите оглавление новости для карусели', {'fields': ['title']}),
+        ('Выберите изображение карусели', {'fields': ['image_carousel']}),
+        ('Ведите ссылку на новость или товар', {'fields': ['link']}),
+        ('Установите приоритет', {'fields': ['index']}),
+
+    ]
+    list_display = ('title', 'created_date', 'link', 'index')
+
+
+admin.site.register(Carousel, CarouselAdmin)

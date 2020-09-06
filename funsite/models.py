@@ -54,3 +54,33 @@ class News(models.Model):
         """Attribute allows you to use the plural form of 'News'"""
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+
+class Carousel(models.Model):
+    """The model carousel. Which will display carousel on the main page."""
+    title = models.CharField(max_length=200, verbose_name='Название новости в карусели')
+    image_carousel = models.ImageField(blank=True, upload_to=get_timestamp_path,
+                                       verbose_name='Загрузить изображение*. Рекомендуемые '
+                                                    'размеры: 1280х400 пикселей!')
+    created_date = models.DateTimeField(auto_now_add=True, db_index=True,
+                                        verbose_name='Дата публикации')
+    link = models.CharField(max_length=255, verbose_name='Ссылка на новость, товар или сайт.')
+    index = models.IntegerField(verbose_name='Индекс приоритета отображения')
+
+    def __str__(self):
+        return self.title
+
+    def save(self):
+        super().save()
+        img = Image.open(self.image_carousel.path)
+
+        if img.width > 1280 or img.height > 400:
+            output_size_carousel = (1280, 400)
+            img.thumbnail(output_size_carousel)
+            img.save(self.image_carousel.path)
+
+
+    class Meta:
+        """Attribute allows you to use the plural form of 'carousels'"""
+        verbose_name = 'Карусель'
+        verbose_name_plural = 'Карусель'
