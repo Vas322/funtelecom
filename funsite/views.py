@@ -8,7 +8,7 @@ def index(request):
     """Controller that displays the main page"""
     brand_list = Brand.objects.all()
     news_list = News.objects.order_by('-created_date')[:3]
-    carousel_list = Carousel.objects.order_by('index').all()[:3]
+    carousel_list = Carousel.objects.order_by('index').all()[:5]
     context = {'brand_list': brand_list, 'news_list': news_list, 'carousel_list': carousel_list}
     return render(request, "funsite/index.html", context)
 
@@ -32,3 +32,10 @@ def all_news(request):
     news_list = News.objects.order_by('-created_date')
     context = {'news_list': news_list}
     return render(request, "funsite/all_news.html", context)
+
+
+def all_brands(request):
+    """Controller that displays the all brands on page"""
+    brand_list = Brand.objects.all()
+    context = {'brand_list': brand_list}
+    return render(request, "funsite/all_brands.html", context)

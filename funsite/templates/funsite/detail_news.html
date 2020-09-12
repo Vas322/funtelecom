@@ -4,14 +4,23 @@
 
 {% block title %} Funtelecom - {{ news.title }} {% endblock title %}
 
-{% block content %}
-	<h5><a href="{% url 'index' %}">Главная страница - </a>
-	<a href="{% url 'all_news' %}">Новости</a> - {{ news.title }}</h5>
-	<h2 class="detail-title"> {{ news.title }}</h2>
-	<div class="image-detail"> <img src=" {{ news.image_news.url }}"></div>
-	<div class="">				
-		<p>{% autoescape off %}{{ news.text}}{% endautoescape %}</p>
-	</div>
-	<p>Дата публикации: {{ news.created_date|date:"d-M-Y" }}</p>
 
+{% block content %}
+<div class="container news-detail p-3">
+
+	<h6><a class="m-3" href="{% url 'index' %}">Главная страница </a> /
+	<a href="{% url 'all_news' %}">Новости</a> / {{ news.title }}</h6>
+
+	<h2 class="detail-title text-center"> {{ news.title }}</h2>
+	<div class="media">
+
+		 <img class="align-self-center mr-3" src=" {{ news.image_news.url }}">
+		<div class="media-body">				
+			<div class="mt-0"><p>{% autoescape off %}{{ news.text}}{% endautoescape %}</p></div>
+		</div>
+
+	</div>
+	<p class="text-right font-italic">Дата публикации: {{ news.created_date  }}</p>
+
+</div>
 {% endblock content %}

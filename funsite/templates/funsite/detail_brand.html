@@ -5,9 +5,11 @@
 {% block title %} Funtelecom - {{ brand.name }} {% endblock title %}
 
 {% block content %}
-
-	<h2 class="detail-title"> {{ brand.name }}</h2>
-	<div class="image-detail"> <img src=" {{ brand.image_brand.url }}"></div>
+<div class="container news-detail p-3">
+	<h6><a class="m-2" href="{% url 'index' %}">Главная страница</a>/
+		<a href="{% url 'all_brands' %}">Все бренды</a> / {{ brand.name }}</h6>
+	
+	<div class="image-detail m-4"> <img src=" {{ brand.image_brand.url }}"></div>
 	<div class="">				
 		<p>{% autoescape off %}{{ brand.text}}{% endautoescape %}</p>
 	</div>
@@ -15,4 +17,5 @@
 		<a href="{{ brand.link_site }}">Ссылка на сайт</a>
 	</div>
 
+</div>
 {% endblock content %}

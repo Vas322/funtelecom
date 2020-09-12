@@ -21,7 +21,7 @@ class Brand(models.Model):
         super().save()
         img = Image.open(self.image_brand.path)
 
-        if img.height > 300 or img.width > 250:
+        if img.height > 200 or img.width > 200:
             output_size_brand = (200, 200)
             img.thumbnail(output_size_brand)
             img.save(self.image_brand.path)
@@ -45,8 +45,8 @@ class News(models.Model):
         super().save()
         img = Image.open(self.image_news.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size_news = (300, 300)
+        if img.height > 400 or img.width > 400:
+            output_size_news = (400, 400)
             img.thumbnail(output_size_news)
             img.save(self.image_news.path)
 
@@ -61,7 +61,7 @@ class Carousel(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название новости в карусели')
     image_carousel = models.ImageField(blank=True, upload_to=get_timestamp_path,
                                        verbose_name='Загрузить изображение*. Рекомендуемые '
-                                                    'размеры: 1280х400 пикселей!')
+                                                    'размеры: 1000х400 пикселей!')
     created_date = models.DateTimeField(auto_now_add=True, db_index=True,
                                         verbose_name='Дата публикации')
     link = models.CharField(max_length=255, verbose_name='Ссылка на новость, товар или сайт.')
@@ -74,8 +74,8 @@ class Carousel(models.Model):
         super().save()
         img = Image.open(self.image_carousel.path)
 
-        if img.width > 1280 or img.height > 400:
-            output_size_carousel = (1280, 400)
+        if img.width > 1000 or img.height > 400:
+            output_size_carousel = (1000, 400)
             img.thumbnail(output_size_carousel)
             img.save(self.image_carousel.path)
 
@@ -84,3 +84,4 @@ class Carousel(models.Model):
         """Attribute allows you to use the plural form of 'carousels'"""
         verbose_name = 'Карусель'
         verbose_name_plural = 'Карусель'
+

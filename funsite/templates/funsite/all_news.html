@@ -5,19 +5,26 @@
 {% block title %} Funtelecom - Все новости {% endblock title %}
 
 {% block content %}
-
-<a href="{% url 'index' %}"><h5>Главная страница</a> - Новости</h5>
-
-{% for news in news_list %}
-
-	<div>
-		<a href="{% url 'detail_news' pk=news.pk %}">
-			<img src=" {{ news.image_news.url }}">
-		</a>
-	</div>
-<br>
+	<div class="container">
 	
-{% endfor %}
-<hr>
+		<a class="m-2" href="{% url 'index' %}"><h6>Главная страница</a> / Новости</h6>
+	
+		{% for news in news_list %}
+		<div class="news-all my-5 p-3">
+			<div class="text-center">
+			<h2><a href="{% url 'detail_news' pk=news.pk %}">{{ news.title }}</a></h2>
+			</div>
+				<div class="media">
+					<img class="align-self-start mr-3"src=" {{ news.image_news.url }}">
+					<div class="media-body">
+						<div class="mt-0">{{ news.text|truncatewords:30 }}</div>
+					</div>
+				</div>
+				<div class="date">				
+					<p class="text-right font-italic">{{ news.created_date }}</p>
+				</div>
+			</div>
+		{% endfor %}
+</div>
 
 {% endblock content %}

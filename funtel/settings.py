@@ -132,7 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 THUMBNAILS_ALLIASES = {
     '': {
         'default': {
-            'size': (96, 96),
+            'size': (300, 300),
             'crop': 'scale',
         },
     },

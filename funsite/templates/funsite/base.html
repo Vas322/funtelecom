@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
-
 <head>
   <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,16 +11,19 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="header-block">
-      <div class="header-container">
-        <div class="header-element">    
-          <div class="header-content logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
-           alt="logo"></a>
+
+<div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="header">
+            <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
+             alt="logo"></a>
+           </div>
          </div>
        </div>
-       <div class="header-element">
-         <div class="header-content contacts">
+       <div class="col-sm">
+         <div class="contacts">
            <p>+7 (495) 255 44 66</p>
            <p>partner@funtelecom.ru</p>
          </div>
@@ -32,50 +34,63 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">      
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Компания
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">О нас</a>
-            <a class="dropdown-item" href="{% url 'all_news' %}">Новости</a>
-            <a class="dropdown-item" href="#">Контакты</a>          
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Каталог
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Бренды</a>          
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Партнерам
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="https://b2b.funtelecom.ru/" target="_blank">Вход в B2B</a>
-            <a class="dropdown-item" href="{% url 'all_news' %}">Стать партнером</a>
-            <a class="dropdown-item" href="#">Регистрация проекта</a>          
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Техподдержка</a>
-        </li>      
-      </ul>    
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">      
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Компания
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">О нас</a>
+              <a class="dropdown-item" href="{% url 'all_news' %}">Новости</a>
+              <a class="dropdown-item" href="#">Контакты</a>          
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Каталог
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'all_brands' %}">Бренды</a>          
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Партнерам
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://b2b.funtelecom.ru/" target="_blank">Вход в B2B</a>
+              <a class="dropdown-item" href="{% url 'all_news' %}">Стать партнером</a>
+              <a class="dropdown-item" href="#">Регистрация проекта</a>          
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Техподдержка</a>
+          </li>      
+        </ul>    
+      </div>
     </div>
   </nav>
+<div class="content">
   {% block content %}
 
   {% endblock %}
-  <footer>
-    <p class="text-right font-italic">&copy; By Dmitrochenko, 2020г.</p>    
-  </footer>
 </div>
+  <div class="footer">
+    <p class="text-right font-italic text-white footer">&copy; By Dmitrochenko, 2020г.</p>    
+  </div>
+</div>
+<style>
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

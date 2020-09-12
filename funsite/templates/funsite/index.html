@@ -5,50 +5,65 @@
 {% block title %} Funtelecom - Главная страница {% endblock title %}
 
 {% block content %}
-
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-	  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleSlidesOnly" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleSlidesOnly" data-slide-to="1"></li>
-    <li data-target="#carouselExampleSlidesOnly" data-slide-to="2"></li>
+<div class="container">
+	
+	<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+		<!-- Индикаторы -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel" data-slide-to="1"></li>
+    <li data-target="#carousel" data-slide-to="2"></li>
   </ol>
-	<div class="carousel-inner ">
-		{% for carousel in carousel_list %}
-		{% if forloop.first %}
-		<div class="carousel-item active">
-			<a href="{{ carousel.link }}"><img src="{{ carousel.image_carousel.url }}" class="d-block"></a>
-		</div>		
-		{% else %} 
-		<div class="carousel-item">
-			<a href="{{ carousel.link }}"><img src="{{ carousel.image_carousel.url }}" class="d-block"></a>
+  <div class="carousel-inner">
+    {% for carousel in carousel_list %}
+      {% if forloop.first %}
+      <div class="carousel-item active ">
+        <a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class="d-block"></a>
+      </div>    
+      {% else %} 
+      <div class="carousel-item">
+        <a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class=" d-block"></a>
+      </div>
+      {% endif %}
+      {% endfor %} 
+      
+  </div>
+  <!-- Элементы управления -->
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Предыдущий</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Следующий</span>
+  </a>
+</div>
+</div>
+
+
+<div class="all-news"><a href="{% url 'all_news' %}">Новости</a></div>
+<div class="container news">	
+	{% for news in news_list %}
+	<ins class="thumbnail">	
+		<div class="img-news border">
+			<a href="{% url 'detail_news' pk=news.pk %}">
+				<img class="shadow" src="{{ news.image_news.url }}">
+			</a><br/>
 		</div>
-		{% endif %}
-		{% endfor %}		
-	</div>
-	<a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
+	</ins>
+	{% endfor %}	
 </div>
 
-<br><hr>
+<div class="all-brands"><a href="{% url 'all_brands' %}">Наши бренды</a></div>
 
-<h2>Новости</h2>
-
-{% for news in news_list %}
-
-<div>
-	<a href="{% url 'detail_news' pk=news.pk %}">
-		<img src=" {{ news.image_news.url }}">
-	</a>
+<div class="container brands">	
+	{% for brand in brand_list %}
+		<div class="child-brands">
+			<a href="{% url 'detail_brand' pk=brand.pk %}">
+				<img class="" src="{{ brand.image_brand.url }}">
+			</a><br/>
+		</div>
+	{% endfor %}	
 </div>
-<br>
 
-{% endfor %}
-<a href="{% url 'all_news' %}">Все новости</a>
-<hr>
 {% endblock content %}
