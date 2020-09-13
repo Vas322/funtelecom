@@ -1,0 +1,18 @@
+{% extends 'funsite/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block title %} Компания - {{ my_company_info.title }} {% endblock title %}
+
+{% block content %}
+<div class="container">
+	{% for company in my_company_info %}
+	<div class="title-company">
+		<h2>{{ company.title }}</h2>
+	</div>
+	<div class="description-company">
+		{{company.description}}
+	</div>
+	{% endfor %}
+</div>
+{% endblock content %}

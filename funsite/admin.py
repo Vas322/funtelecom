@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from funsite.models import Brand, News, Carousel
+from funsite.models import Brand, News, Carousel, CompanyInfo
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -15,9 +15,6 @@ class BrandAdmin(admin.ModelAdmin):
     list_display = ('name', 'link_site')
 
 
-admin.site.register(Brand, BrandAdmin)
-
-
 class NewsAdmin(admin.ModelAdmin):
     """Displaying a News in the admin panel"""
     fieldsets = [
@@ -26,9 +23,6 @@ class NewsAdmin(admin.ModelAdmin):
         ('Выберите изображение новости', {'fields': ['image_news']}),
     ]
     list_display = ('title', 'created_date')
-
-
-admin.site.register(News, NewsAdmin)
 
 
 class CarouselAdmin(admin.ModelAdmin):
@@ -43,4 +37,12 @@ class CarouselAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'link', 'index')
 
 
+class CompanyInfoAdmin(admin.ModelAdmin):
+    """Displaying the info about company in the admin panel"""
+    list_display = ('title', 'description')
+
+
+admin.site.register(CompanyInfo, CompanyInfoAdmin)
+admin.site.register(Brand, BrandAdmin)
+admin.site.register(News, NewsAdmin)
 admin.site.register(Carousel, CarouselAdmin)

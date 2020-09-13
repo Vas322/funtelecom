@@ -10,7 +10,7 @@ def get_timestamp_path(instance, filename):
 
 
 class Brand(models.Model):
-    """The model describes the brand. Which will be display on the page."""
+    """The model describes the brand"""
     name = models.CharField(max_length=200, verbose_name='Название бренда*')
     text = models.TextField(verbose_name='Описание бренда*')
     link_site = models.CharField(max_length=200, verbose_name='Ссылка на сайт')
@@ -33,7 +33,7 @@ class Brand(models.Model):
 
 
 class News(models.Model):
-    """The model news. Which will display news on the page."""
+    """The model news"""
     title = models.CharField(max_length=200, verbose_name='Название новости')
     text = models.TextField(verbose_name='Текст новости')
     image_news = models.ImageField(blank=True, upload_to=get_timestamp_path,
@@ -57,7 +57,7 @@ class News(models.Model):
 
 
 class Carousel(models.Model):
-    """The model carousel. Which will display carousel on the main page."""
+    """The model carousel"""
     title = models.CharField(max_length=200, verbose_name='Название новости в карусели')
     image_carousel = models.ImageField(blank=True, upload_to=get_timestamp_path,
                                        verbose_name='Загрузить изображение*. Рекомендуемые '
@@ -79,9 +79,18 @@ class Carousel(models.Model):
             img.thumbnail(output_size_carousel)
             img.save(self.image_carousel.path)
 
-
     class Meta:
         """Attribute allows you to use the plural form of 'carousels'"""
         verbose_name = 'Карусель'
         verbose_name_plural = 'Карусель'
 
+
+class CompanyInfo(models.Model):
+    """Model with company information"""
+    title = models.CharField(max_length=255, verbose_name='Название Компании')
+    description = models.TextField(verbose_name='Описание компании')
+
+    class Meta:
+        """Attribute allows you to use the plural form of 'News'"""
+        verbose_name = 'Инфо о компании'
+        verbose_name_plural = 'Инфо о компании'

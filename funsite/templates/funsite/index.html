@@ -9,35 +9,35 @@
 	
 	<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
 		<!-- Индикаторы -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel" data-slide-to="1"></li>
-    <li data-target="#carousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    {% for carousel in carousel_list %}
-      {% if forloop.first %}
-      <div class="carousel-item active ">
-        <a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class="d-block"></a>
-      </div>    
-      {% else %} 
-      <div class="carousel-item">
-        <a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class=" d-block"></a>
-      </div>
-      {% endif %}
-      {% endfor %} 
-      
-  </div>
-  <!-- Элементы управления -->
-  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Предыдущий</span>
-  </a>
-  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Следующий</span>
-  </a>
-</div>
+		<ol class="carousel-indicators">
+			<li data-target="#carousel" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel" data-slide-to="1"></li>
+			<li data-target="#carousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			{% for carousel in carousel_list %}
+			{% if forloop.first %}
+			<div class="carousel-item active ">
+				<a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class="d-block"></a>
+			</div>    
+			{% else %} 
+			<div class="carousel-item">
+				<a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class=" d-block"></a>
+			</div>
+			{% endif %}
+			{% endfor %} 
+
+		</div>
+		<!-- Элементы управления -->
+		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Предыдущий</span>
+		</a>
+		<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Следующий</span>
+		</a>
+	</div>
 </div>
 
 
@@ -58,12 +58,23 @@
 
 <div class="container brands">	
 	{% for brand in brand_list %}
-		<div class="child-brands">
-			<a href="{% url 'detail_brand' pk=brand.pk %}">
-				<img class="" src="{{ brand.image_brand.url }}">
-			</a><br/>
-		</div>
+	<div class="child-brands">
+		<a href="{% url 'detail_brand' pk=brand.pk %}">
+			<img class="" src="{{ brand.image_brand.url }}">
+		</a><br/>
+	</div>
 	{% endfor %}	
 </div>
-
+<div class="container">
+	<div class="row">
+		{% for company in my_company_info %}
+		<div class="title-company">
+			<a href="{% url 'company_info' %}"><h2>О нас</h2></a>
+		</div>
+		<div class="text-company">
+			<p>{{company.description}}</p>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 {% endblock content %}

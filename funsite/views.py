@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from funsite.models import Brand, News, Carousel
+from funsite.models import Brand, News, Carousel, CompanyInfo
 
 
 def index(request):
@@ -9,7 +9,9 @@ def index(request):
     brand_list = Brand.objects.all()
     news_list = News.objects.order_by('-created_date')[:3]
     carousel_list = Carousel.objects.order_by('index').all()[:5]
-    context = {'brand_list': brand_list, 'news_list': news_list, 'carousel_list': carousel_list}
+    my_company_info = CompanyInfo.objects.all()
+    context = {'brand_list': brand_list, 'news_list': news_list, 'carousel_list': carousel_list,
+               'my_company_info': my_company_info}
     return render(request, "funsite/index.html", context)
 
 
@@ -39,3 +41,10 @@ def all_brands(request):
     brand_list = Brand.objects.all()
     context = {'brand_list': brand_list}
     return render(request, "funsite/all_brands.html", context)
+
+
+def company_info(request):
+    """Controller that displays the info about company"""
+    my_company_info = CompanyInfo.objects.all()
+    context = {'my_company_info': my_company_info}
+    return render(request, "funsite/company_info.html", context)
