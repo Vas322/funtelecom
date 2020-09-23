@@ -55,7 +55,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 @media (min-width: 769px) {
 	.news{
 		display:flex;
-		justify-content: space-around ;
+		justify-content: space-between;
 		box-shadow: 0 0 10px #c5c5c5;
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -85,6 +85,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 .img-news img{
 	height: 200px;
+	width: 100%;
 }
 .date{
   color: #5c7489;
