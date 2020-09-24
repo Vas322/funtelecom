@@ -3,6 +3,7 @@ from datetime import datetime
 from os.path import splitext
 from PIL import Image
 from django.core.validators import MaxValueValidator, MinValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 def get_timestamp_path(instance, filename):
@@ -169,3 +170,41 @@ class Street(models.Model):
     class Meta:
         verbose_name = 'Улица'
         verbose_name_plural = 'улицы'
+
+
+class Email(models.Model):
+    """The model stores contact information"""
+    email = models.EmailField(max_length=150, verbose_name='email адрес')
+    department = models.ForeignKey('Department', on_delete=models.CASCADE,
+                                   verbose_name='Название подразделения')
+    partner = models.ForeignKey('Partner', on_delete=models.CASCADE,
+                                verbose_name='Партнер')
+
+
+class Phone(models.Model):
+    """The model stores phone numbers"""
+    phone_number = PhoneNumberField(verbose_name='Введите номер телефона')
+    extension_number = models.PositiveIntegerField(verbose_name='Добавочный номер', blank=True,
+                                                   validators=[MaxValueValidator(100000),
+                                                               MinValueValidator(1)])
+    type_number = models.ForeignKey('TypeNumberPhone', on_delete=models.CASCADE,
+                                    verbose_name='Тип телефона')
+    partner = models.ForeignKey('Partner', on_delete=models.CASCADE,
+                                verbose_name='Партнер')
+
+    def __str__(self):
+        return self.phone_number
+
+    class Meta:
+        verbose_name = 'Телефонный номер'
+        verbose_name_plural = 'Телефоннные номера'
+
+
+class TypeNumberPhone(models.Model):
+    """The Model stores phone types information"""
+    type_number = models.CharField(max_length=30, verbose_name='Тип номера телефона')
+
+
+class Partner(models.Model):
+    """The Model stores partner information"""
+    name_partner_company = models.CharField(max_length=200, verbose_name='Название компании партнера')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, City, Street
+from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, City, Street, Phone
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -68,3 +68,4 @@ admin.site.register(Address, AddressAdmin)
 admin.site.register(Country)
 admin.site.register(City)
 admin.site.register(Street)
+admin.site.register(Phone)
