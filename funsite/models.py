@@ -104,6 +104,12 @@ class Department(models.Model):
                                        help_text='Например, Офис')
     working_hours = models.CharField(max_length=30, verbose_name='Часы работы',
                                      help_text='Пример: С 9-00 до 18-00')
+    email_department = models.ForeignKey('Email', on_delete=models.CASCADE,
+                                         verbose_name='Эл.почта подразделения')
+    phone_department = models.ForeignKey('Phone', on_delete=models.CASCADE,
+                                         verbose_name='Телефон подразделения')
+    department_address = models.ForeignKey('Address', on_delete=models.CASCADE,
+                                           verbose_name='Адрес подразделения')
 
     def __str__(self):
         return self.name_department
@@ -117,7 +123,6 @@ class Address(models.Model):
     """The model describes the address"""
     title = models.CharField(max_length=50, blank=True, verbose_name='Описание адреса',
                              help_text='Например, Адрес склада')
-    department = models.ForeignKey('Department', on_delete=models.CASCADE, verbose_name='Название подразделения')
     country = models.ForeignKey('Country', on_delete=models.CASCADE, verbose_name='Страна')
     city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')
     street = models.ForeignKey('Street', on_delete=models.CASCADE, verbose_name='Улица')
@@ -175,10 +180,6 @@ class Street(models.Model):
 class Email(models.Model):
     """The model stores contact information"""
     email = models.EmailField(max_length=150, verbose_name='email адрес')
-    department = models.ForeignKey('Department', on_delete=models.CASCADE,
-                                   verbose_name='Название подразделения')
-    partner = models.ForeignKey('Partner', on_delete=models.CASCADE,
-                                verbose_name='Партнер')
 
 
 class Phone(models.Model):
@@ -189,8 +190,6 @@ class Phone(models.Model):
                                                                MinValueValidator(1)])
     type_number = models.ForeignKey('TypeNumberPhone', on_delete=models.CASCADE,
                                     verbose_name='Тип телефона')
-    partner = models.ForeignKey('Partner', on_delete=models.CASCADE,
-                                verbose_name='Партнер')
 
     def __str__(self):
         return self.phone_number
@@ -208,3 +207,7 @@ class TypeNumberPhone(models.Model):
 class Partner(models.Model):
     """The Model stores partner information"""
     name_partner_company = models.CharField(max_length=200, verbose_name='Название компании партнера')
+    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE,
+                                      verbose_name='Телефон партнера')
+    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE,
+                                      verbose_name='Эл.почта партнера')

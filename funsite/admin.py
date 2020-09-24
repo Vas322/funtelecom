@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, City, Street, Phone
+from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, \
+    City, Street, Phone
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -42,20 +43,14 @@ class CompanyInfoAdmin(admin.ModelAdmin):
     list_display = ('title', 'description')
 
 
-class AddressInline(admin.TabularInline):
-    model = Address
-    extra = 1
-
-
 class DepartmentAdmin(admin.ModelAdmin):
     """Displaying the info about department in the admin panel"""
-    inlines = [AddressInline, ]
     list_display = ('name_department',)
 
 
 class AddressAdmin(admin.ModelAdmin):
     """Displaying the info about street in the admin panel"""
-    list_display = ('title', 'department', 'country', 'city', 'street', 'number_house',
+    list_display = ('title', 'country', 'city', 'street', 'number_house',
                     'number_flat', 'number_office')
 
 
