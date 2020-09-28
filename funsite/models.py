@@ -138,7 +138,7 @@ class Address(models.Model):
 
     class Meta:
         verbose_name = 'Адрес'
-        verbose_name_plural = 'Адреса'
+        verbose_name_plural = 'Адрес'
 
 
 class Country(models.Model):
@@ -167,19 +167,27 @@ class City(models.Model):
 
 class Street(models.Model):
     """The model describes the street"""
-    name_street = models.CharField(max_length=56, verbose_name='Название улицы')
+    name_street = models.CharField(max_length=56, verbose_name='Название улицы',
+                                   help_text='Если в списке нет улицы, то внесите ее нажав на "+"')
 
     def __str__(self):
         return self.name_street
 
     class Meta:
         verbose_name = 'Улица'
-        verbose_name_plural = 'улицы'
+        verbose_name_plural = 'Улица'
 
 
 class Email(models.Model):
     """The model stores contact information"""
     email = models.EmailField(max_length=150, verbose_name='email адрес')
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'Электронная почта'
+        verbose_name_plural = 'Электронная почта'
 
 
 class Phone(models.Model):
@@ -192,7 +200,7 @@ class Phone(models.Model):
                                     verbose_name='Тип телефона')
 
     def __str__(self):
-        return self.phone_number
+        return str(self.phone_number)
 
     class Meta:
         verbose_name = 'Телефонный номер'
@@ -201,7 +209,15 @@ class Phone(models.Model):
 
 class TypeNumberPhone(models.Model):
     """The Model stores phone types information"""
-    type_number = models.CharField(max_length=30, verbose_name='Тип номера телефона')
+    type_number = models.CharField(max_length=30, verbose_name='Тип номера телефона',
+                                   help_text='Например, Рабочий.')
+
+    def __str__(self):
+        return self.type_number
+
+    class Meta:
+        verbose_name = 'Тип номера'
+        verbose_name_plural = 'Тип номера'
 
 
 class Partner(models.Model):
@@ -211,3 +227,10 @@ class Partner(models.Model):
                                       verbose_name='Телефон партнера')
     partner_email = models.ForeignKey('Email', on_delete=models.CASCADE,
                                       verbose_name='Эл.почта партнера')
+
+    def __str__(self):
+        return self.name_partner_company
+
+    class Meta:
+        verbose_name = 'Партнер'
+        verbose_name_plural = 'Партнеры'
