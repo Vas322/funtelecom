@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, \
-    City, Street, Phone, Partner, Email, TypeNumberPhone
+    City, Street, Phone, Partner, Email, TypeNumberPhone, TargetRegistrationPartner, PositionInMarket
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -101,7 +101,7 @@ class EmailAdmin(admin.ModelAdmin):
 
 class TypeNumberPhoneAdmin(admin.ModelAdmin):
     """
-    Hiding an TypeNumber Phone in the admin panel.
+    Hiding a TypeNumber Phone in the admin panel.
     But TypeNumberPhone is available when add related models
     """
 
@@ -114,8 +114,35 @@ class TypeNumberPhoneAdmin(admin.ModelAdmin):
 
 class PartnerAdmin(admin.ModelAdmin):
     """Displaying the info about partner in the admin panel"""
-    list_display = ('name_partner_company', 'partner_phone', 'partner_email')
-    search_fields = ['name_partner_company']
+    list_display = ('name_partner_company', 'target_registration', 'position_partner_on_market', 'partner_phone',
+                    'partner_email', 'partner_address')
+    search_fields = ['name_partner_company', 'target_registration', 'position_partner_on_market', 'partner_phone',
+                     'partner_email', 'partner_address']
+    list_display_links = ('name_partner_company', 'partner_address',)
+
+
+class TargetRegistrationPartnerAdmin(admin.ModelAdmin):
+    """Hiding a target registration partner in the admin panel.
+    But TargetRegistrationPartner is available when add related models
+    """
+
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class PositionInMarketAdmin(admin.ModelAdmin):
+    """Hiding information about a partner's position in the admin panel.
+    But PositionInMarket is available when add related models
+    """
+
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
@@ -131,3 +158,5 @@ admin.site.register(Phone, CountryAdmin)
 admin.site.register(Email, EmailAdmin)
 admin.site.register(Partner, PartnerAdmin)
 admin.site.register(TypeNumberPhone, TypeNumberPhoneAdmin)
+admin.site.register(TargetRegistrationPartner, TargetRegistrationPartnerAdmin)
+admin.site.register(PositionInMarket, PositionInMarketAdmin)

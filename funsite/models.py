@@ -193,9 +193,8 @@ class Email(models.Model):
 class Phone(models.Model):
     """The model stores phone numbers"""
     phone_number = PhoneNumberField(verbose_name='Введите номер телефона')
-    extension_number = models.PositiveIntegerField(verbose_name='Добавочный номер', blank=True,
-                                                   validators=[MaxValueValidator(100000),
-                                                               MinValueValidator(1)])
+    extension_number = models.PositiveIntegerField(verbose_name='Добавочный номер', blank=True, null=True,
+                                                   validators=[MaxValueValidator(100000), MinValueValidator(1)])
     type_number = models.ForeignKey('TypeNumberPhone', on_delete=models.CASCADE,
                                     verbose_name='Тип телефона')
 
@@ -223,10 +222,13 @@ class TypeNumberPhone(models.Model):
 class Partner(models.Model):
     """The Model stores partner information"""
     name_partner_company = models.CharField(max_length=200, verbose_name='Название компании партнера')
-    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE,
-                                      verbose_name='Телефон партнера')
-    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE,
-                                      verbose_name='Эл.почта партнера')
+    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Телефон партнера')
+    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта партнера')
+    partner_address = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес партнера')
+    target_registration = models.ForeignKey('TargetRegistrationPartner', on_delete=models.CASCADE, null=True,
+                                            verbose_name='Цель регистрации')
+    position_partner_on_market = models.ForeignKey('PositionInMarket', on_delete=models.CASCADE, null=True,
+                                                   verbose_name='Позиция на рынке', help_text='Например, "Интегратор"')
 
     def __str__(self):
         return self.name_partner_company
@@ -234,3 +236,62 @@ class Partner(models.Model):
     class Meta:
         verbose_name = 'Партнер'
         verbose_name_plural = 'Партнеры'
+
+
+class TargetRegistrationPartner(models.Model):
+    """
+    The model stores information about the purpose of registering a partner on the site
+    """
+    title = models.CharField(max_length=100, verbose_name='Цель регистрации партнера',
+                             help_text='Например, покупка товаров оптом.')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Цель регистрации'
+        verbose_name_plural = 'Цели регистрации'
+
+
+class PositionInMarket(models.Model):
+    """The model stores information about partner's position in the market"""
+    title = models.CharField(max_length=100, verbose_name='Позиция на рынке', help_text='Например, "Интегратор"')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Позиция на рынке'
+        verbose_name_plural = 'Позиция на рынке'
+
+
+class Employee(models.Model):
+    """The model stores information about partner's employee"""
+    last_name = models.CharField(max_length=100, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=100, verbose_name='Имя')
+    employee_position = models.ForeignKey('EmployeePosition', on_delete=models.CASCADE,
+                                          verbose_name='Должность сотрудника')
+    email_employee = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта сотрудника')
+    phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
+    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, verbose_name='Адрес сотрудника')
+    name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
+                                     verbose_name='Принадлежность сотрудника к партнеру')
+
+    def __str__(self):
+        return self.last_name
+
+    class Meta:
+        verbose_name = 'Фамилия'
+        verbose_name_plural = 'Фамилия'
+
+
+class EmployeePosition(models.Model):
+    """The model stores information about employee position"""
+    title = models.CharField(max_length=100, verbose_name='Должность сотрудника')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Должность сотрудника'
+        verbose_name_plural = 'Должность сотрудника'
