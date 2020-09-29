@@ -2,7 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, \
-    City, Street, Phone, Partner, Email, TypeNumberPhone, TargetRegistrationPartner, PositionInMarket
+    City, Street, Phone, Partner, Email, TypeNumberPhone, TargetRegistrationPartner, PositionInMarket, Employee, \
+    EmployeePosition
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -145,6 +146,26 @@ class PositionInMarketAdmin(admin.ModelAdmin):
         return {}
 
 
+class EmployeeAdmin(admin.ModelAdmin):
+    """Displaying the info about partner's employee in the admin panel"""
+    list_display = ('last_name', 'first_name', 'employee_position', 'email_employee', 'phone_employee', 'name_partner',
+                    'address_employee')
+    search_fields = ['last_name', 'employee_position', 'email_employee', 'name_partner']
+    list_display_links = ('address_employee',)
+
+
+class EmployeePositionAdmin(admin.ModelAdmin):
+    """Hiding information about an employee's position in the admin panel.
+        But EmployeePosition is available when add related models
+        """
+
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(News, NewsAdmin)
@@ -160,3 +181,5 @@ admin.site.register(Partner, PartnerAdmin)
 admin.site.register(TypeNumberPhone, TypeNumberPhoneAdmin)
 admin.site.register(TargetRegistrationPartner, TargetRegistrationPartnerAdmin)
 admin.site.register(PositionInMarket, PositionInMarketAdmin)
+admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(EmployeePosition, EmployeePositionAdmin)

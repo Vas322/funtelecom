@@ -95,6 +95,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 	width: 50%;
 	border-color: #ee8121;
 	padding-top: 10px;
+	margin-bottom: 15px; 
 }
 
 .text-company{

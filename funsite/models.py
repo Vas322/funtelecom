@@ -19,6 +19,9 @@ class Brand(models.Model):
     image_brand = models.ImageField(blank=True, upload_to=get_timestamp_path,
                                     verbose_name='Загрузить изображение*')
 
+    def __str__(self):
+        return self.name
+
     def save(self):
         super().save()
         img = Image.open(self.image_brand.path)
@@ -44,6 +47,9 @@ class News(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, db_index=True,
                                         verbose_name='Дата публикации')
 
+    def __str__(self):
+        return self.title
+
     def save(self):
         super().save()
         img = Image.open(self.image_news.path)
@@ -68,7 +74,8 @@ class Carousel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, db_index=True,
                                         verbose_name='Дата публикации')
     link = models.CharField(max_length=255, verbose_name='Ссылка на новость, товар или сайт.')
-    index = models.IntegerField(verbose_name='Индекс приоритета отображения')
+    index = models.IntegerField(verbose_name='Индекс приоритета отображения',
+                                help_text='Введите число от 0 до 10. 0 имеет самый высокий приоритет.')
 
     def __str__(self):
         return self.title
@@ -275,14 +282,14 @@ class Employee(models.Model):
     phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
     address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, verbose_name='Адрес сотрудника')
     name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
-                                     verbose_name='Принадлежность сотрудника к партнеру')
+                                     verbose_name='Работает в компании')
 
     def __str__(self):
         return self.last_name
 
     class Meta:
-        verbose_name = 'Фамилия'
-        verbose_name_plural = 'Фамилия'
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
 
 
 class EmployeePosition(models.Model):

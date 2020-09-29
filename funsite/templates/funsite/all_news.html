@@ -7,21 +7,21 @@
 {% block content %}
 	<div class="container">
 	
-		<a class="m-2" href="{% url 'index' %}"><h6>Главная страница</a> / Новости</h6>
+		<a class="m-2" href="{% url 'index' %}"><h6>Главная страница</a>/ Новости</h6>
 	
 		{% for news in news_list %}
 		<div class="news-all my-5 p-3">
-			<div class="text-center">
+			<div class="text-center border-bottom">
 			<h2><a href="{% url 'detail_news' pk=news.pk %}">{{ news.title }}</a></h2>
 			</div>
 				<div class="media">
-					<img class="align-self-start mr-3"src=" {{ news.image_news.url }}">
+					<img class="align-self-start mr-3 border-right"src=" {{ news.image_news.url }}">
 					<div class="media-body">
-						<div class="mt-0">{{ news.text|truncatewords:30 }}</div>
+						<div class="m-3">{{ news.text|truncatewords:30 }}</div>
 					</div>
 				</div>
 				<div class="date">				
-					<p class="text-right font-italic">{{ news.created_date }}</p>
+					<p class="text-right font-italic m-3">{{ news.created_date }}</p>
 				</div>
 			</div>
 		{% endfor %}
