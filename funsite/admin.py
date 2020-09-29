@@ -46,8 +46,7 @@ class CompanyInfoAdmin(admin.ModelAdmin):
 
 class DepartmentAdmin(admin.ModelAdmin):
     """Displaying the info about department in the admin panel"""
-    list_display = ('name_department', 'phone_department',
-                    'email_department', 'working_hours')
+    list_display = ('name_department', 'phone_department','email_department', 'working_hours', 'published_on_page')
     list_display_links = ('name_department', 'phone_department', 'email_department')
 
 

@@ -117,6 +117,8 @@ class Department(models.Model):
                                          verbose_name='Телефон подразделения')
     department_address = models.ForeignKey('Address', on_delete=models.CASCADE,
                                            verbose_name='Адрес подразделения')
+    published_on_page = models.BooleanField(default=False, verbose_name='Опубликовано',
+                                            help_text='Публиковать информацию о подразделении на странице?')
 
     def __str__(self):
         return self.name_department

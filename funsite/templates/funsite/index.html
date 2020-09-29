@@ -45,7 +45,7 @@
 <div class="container news">	
 	{% for news in news_list %}
 	<ins class="thumbnail">	
-		<div class="img-news border">
+		<div class="img-news border ">
 			<a href="{% url 'detail_news' pk=news.pk %}">
 				<img class="shadow" src="{{ news.image_news.url }}">
 			</a><br/>
