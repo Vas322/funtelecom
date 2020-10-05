@@ -5,7 +5,12 @@
 {% block title %} Компания - {{ my_company_info.title }} {% endblock title %}
 
 {% block content %}
-<div class="container">
+<div class="container  p-3">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+		</ol>
+	</nav>
 	{% for company in my_company_info %}
 	<div class="title-company">
 		<h2>{{ company.title }}</h2>

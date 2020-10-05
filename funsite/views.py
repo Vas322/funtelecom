@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from funsite.models import Brand, News, Carousel, CompanyInfo, Department
+from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address
 
 
 def index(request):
@@ -52,6 +52,6 @@ def company_info(request):
 
 def contacts_our_company(request):
     """Controller that displays the contacts company on page 'Our contacts'"""
-    contacts_company = Department.objects.filter(published_on_page=True)
-    context = {'contacts_company': contacts_company}
+    contact_company = Department.objects.filter(published_on_page=True)
+    context = {'contact_company': contact_company}
     return render(request, "funsite/contacts_company.html", context)

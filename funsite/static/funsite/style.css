@@ -4,6 +4,7 @@
   font: 1em/1.4 Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #5b5656;  
 }
+
 html,
 body {
   height: 100%; 
@@ -82,8 +83,10 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 	border-top: 1px solid #c5c5c5;
 }
 .img-news img{
-	height: 200px;
+	height: 250px;
+	
 }
+
 .date{
   color: #5c7489;
 }
@@ -126,4 +129,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+.align-self-start{
+	width:200px;
 }

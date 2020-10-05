@@ -5,17 +5,20 @@
 {% block title %} Funtelecom - {{ brand.name }} {% endblock title %}
 
 {% block content %}
-<div class="container news-detail p-3">
-	<h6><a class="m-2" href="{% url 'index' %}">Главная страница</a>/
-		<a href="{% url 'all_brands' %}">Все бренды</a> / {{ brand.name }}</h6>
-	
-	<div class="image-detail m-4"> <img src=" {{ brand.image_brand.url }}"></div>
-	<div class="">				
-		<p>{% autoescape off %}{{ brand.text}}{% endautoescape %}</p>
-	</div>
-	<div>
-		<a href="{{ brand.link_site }}" target="_blank">Ссылка на сайт</a>
-	</div>
-
-</div>
-{% endblock content %}
+<div class="container  p-3">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'all_brands' %}">Все бренды</a></li>
+			<li class="breadcrumb-item">{{ brand.name }}</li>
+		</ol>
+	</nav>
+			<div class="image-detail m-4"> <img src=" {{ brand.image_brand.url }}"></div>
+			<div class="">				
+				<p>{% autoescape off %}{{ brand.text}}{% endautoescape %}</p>
+			</div>
+			<div>
+				<a href="{{ brand.link_site }}" target="_blank">Ссылка на сайт</a>
+			</div>
+		</div>
+		{% endblock content %}

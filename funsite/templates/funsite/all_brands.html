@@ -5,34 +5,40 @@
 {% block title %} Funtelecom - Все Бренды {% endblock title %}
 
 {% block content %}
-	<div class="container">
-	
-		<a class="m-2" href="{% url 'index' %}"><h6>Главная страница</a> / Бренды</h6>
-	<div class=" brand-all">
-		{% for brand in brand_list %}
-		{% if forloop.first %}
-		<div class=" my-5 p-3">
-			<div class="media">
+<div class="container p-3">
+	<div class="row">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+				<li class="breadcrumb-item">Бренды</li>
+			</ol>
+		</nav>		
+		<div class="brand-all">
+			{% for brand in brand_list %}
+			{% if forloop.first %}			
+			<div class="my-5 p-3">
+				<div class="media">
 					<a href="{% url 'detail_brand' pk=brand.pk %}">
-						<img class="align-self-start mr-3 "src="{{ brand.image_brand.url }}"></a>
-					<div class="media-body">
-						<div class="mt-0">{{ brand.text|truncatewords:30 }}</div>
-					</div>					
-			</div>			
+						<img class="align-self-start mr-3" src="{{ brand.image_brand.url }}"></a>
+						<div class="media-body">
+							<div class="mt-0 border-left p-2">{{ brand.text|truncatewords:30 }}</div>
+						</div>					
+					</div>			
+				</div>
+				{% else %} 
+				<div class="brand-item my-5 p-3">
+					<div class="media ">
+						<a href="{% url 'detail_brand' pk=brand.pk %}">
+							<img class="align-self-start mr-3 " src="{{ brand.image_brand.url }}"></a>
+							<div class="media-body">
+								<div class="mt-0 border-left p-2">{{ brand.text|truncatewords:30 }}</div>
+							</div>					
+						</div>			
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
 		</div>
-		{% else %} 
-		<div class="brand-item my-5 p-3">
-			<div class="media ">
-					<a href="{% url 'detail_brand' pk=brand.pk %}">
-						<img class="align-self-start mr-3 "src="{{ brand.image_brand.url }}"></a>
-					<div class="media-body">
-						<div class="mt-0">{{ brand.text|truncatewords:30 }}</div>
-					</div>					
-			</div>			
-		</div>
-		{% endif %}
-		{% endfor %}
-		</div>
-</div>
 
-{% endblock content %}
+		{% endblock content %}

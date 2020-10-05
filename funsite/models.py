@@ -133,14 +133,15 @@ class Address(models.Model):
     title = models.CharField(max_length=50, blank=True, verbose_name='Описание адреса',
                              help_text='Например, Адрес склада')
     country = models.ForeignKey('Country', on_delete=models.CASCADE, verbose_name='Страна')
-    city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')
-    street = models.ForeignKey('Street', on_delete=models.CASCADE, verbose_name='Улица')
-    number_house = models.PositiveSmallIntegerField(verbose_name='Номер дома', validators=[
+    city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Населенный пункт')
+    street = models.ForeignKey('Street', on_delete=models.CASCADE, null=True, verbose_name='Улица')
+    number_house = models.PositiveSmallIntegerField(verbose_name='Номер дома', null=True, blank=True, validators=[
         MaxValueValidator(1000), MinValueValidator(1)])
-    number_flat = models.PositiveSmallIntegerField(verbose_name='Номер помещения', blank=True, validators=[
+    number_flat = models.PositiveSmallIntegerField(verbose_name='Номер помещения', blank=True, null=True, validators=[
         MaxValueValidator(1000), MinValueValidator(1)])
-    number_office = models.PositiveSmallIntegerField(verbose_name='Номер офиса', blank=True, validators=[
+    number_office = models.PositiveSmallIntegerField(verbose_name='Номер офиса', blank=True, null=True, validators=[
         MaxValueValidator(1000), MinValueValidator(1)])
+    access_map_link = models.CharField(max_length=255, verbose_name='Ссылка на схему проезда', null=True, blank=True)
 
     def __str__(self):
         return self.title

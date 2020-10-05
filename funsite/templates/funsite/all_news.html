@@ -5,9 +5,12 @@
 {% block title %} Funtelecom - Все новости {% endblock title %}
 
 {% block content %}
-	<div class="container">
-	
-		<a class="m-2" href="{% url 'index' %}"><h6>Главная страница</a>/ Новости</h6>
+	<div class="container p-3">
+			<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+			</ol>
+		</nav>
 	
 		{% for news in news_list %}
 		<div class="news-all my-5 p-3">
