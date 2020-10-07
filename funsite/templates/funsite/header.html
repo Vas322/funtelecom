@@ -1,23 +1,19 @@
-{% extends 'funsite/base.html' %}
+
 {% load thumbnail %}
 {% load static %}
 
-{% block header %}    
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <div class="header">
-        <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
-         alt="logo"></a>
-       </div>
-     </div>
-   </div>   
-   <div class="col-sm">
-     <div class="contacts">
-       <p>+7 (495) 255 44 66</p>
-       <p>partner@funtelecom.ru</p>
+
+{% block header %}   
+<div class="row">
+  <div class="col-sm">
+    <div class="header">
+      <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
+       alt="logo"></a>
      </div>
    </div>
  </div>
+ {{ email_main_office }}
+   
+{{ phone_main_office }}
 </div>
 {% endblock header %}

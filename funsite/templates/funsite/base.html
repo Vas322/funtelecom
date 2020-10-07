@@ -12,8 +12,8 @@
 
 <body>
 
-<div class="wrapper">
-  <div class="container">
+  <div class="wrapper" >
+    <div class="container">
   <div class="row">
     <div class="col-sm">
       <div class="header">
@@ -24,70 +24,71 @@
    </div>   
    <div class="col-sm">
      <div class="contacts">
-       <p>+7 (495) 255 44 66</p>
-       <p>partner@funtelecom.ru</p>
+       <p>{{ phone_main_office }}</p>
+       <p>{{ email_main_office }}</p>
      </div>
    </div>
  </div>
 </div>
-   <nav class="navbar navbar-expand-lg navbar-light mb-0 h5">  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="container">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">      
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Компания
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'company_info' %}">О нас</a>
-              <a class="dropdown-item" href="{% url 'all_news' %}">Новости</a>
-              <a class="dropdown-item" href="{% url 'contact_our_company' %}">Контакты</a>          
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Каталог
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'all_brands' %}">Бренды</a>          
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Партнерам
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://b2b.funtelecom.ru/" target="_blank">Вход в B2B</a>
-              <a class="dropdown-item" href="#">Стать партнером</a>
-              <a class="dropdown-item" href="#">Регистрация проекта</a>          
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Техподдержка</a>
-          </li>      
-        </ul>    
-      </div>
+
+ <nav class="navbar navbar-expand-lg navbar-light mb-0 h5">  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Компания
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'company_info' %}">О нас</a>
+            <a class="dropdown-item" href="{% url 'all_news' %}">Новости</a>
+            <a class="dropdown-item" href="{% url 'contact_our_company' %}">Контакты</a>          
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Каталог
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'all_brands' %}">Бренды</a>          
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Партнерам
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://b2b.funtelecom.ru/" target="_blank">Вход в B2B</a>
+            <a class="dropdown-item" href="#">Стать партнером</a>
+            <a class="dropdown-item" href="#">Регистрация проекта</a>          
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Техподдержка</a>
+        </li>      
+      </ul>    
     </div>
-  </nav>
+  </div>
+</nav>
 <div class="content">
   {% block content %}
 
   {% endblock %}
 </div>
-  <div class="footer">
-    <p class="text-right font-italic text-white footer">&copy; By Dmitrochenko, 2020г.</p>    
-  </div>
+<div class="footer">
+  <p class="text-right font-italic text-white footer">&copy; By Dmitrochenko, 2020г.</p>    
+</div>
 </div>
 <style>
 .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }
 
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
 </style>

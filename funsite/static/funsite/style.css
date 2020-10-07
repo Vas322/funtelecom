@@ -7,8 +7,7 @@
 
 html,
 body {
-  height: 100%; 
-  
+  height: 100%;   
 }
 
 .header{
@@ -55,10 +54,9 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 @media (min-width: 769px) {
 	.news{
-		display:flex;
-		justify-content: space-between;
-		padding-top: 20px;
-		padding-bottom: 20px;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-column-gap: 20px;
 	}
 }
 .brands{
@@ -82,11 +80,18 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 .brand-item{
 	border-top: 1px solid #c5c5c5;
 }
-.img-news img{
-	height: 250px;
-	
+.news{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
 }
 
+.img-news img{
+	width: 100%;
+	height: 200px;
+	object-fit: contain;
+	object-position: center;	
+}
 .date{
   color: #5c7489;
 }
@@ -124,12 +129,12 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   flex: 0 0 auto;
   margin-top: 20px;
 }
-	
 .wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
 .align-self-start{
 	width:200px;
 }

@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
 
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address
 
@@ -55,3 +54,10 @@ def contacts_our_company(request):
     contact_company = Department.objects.filter(published_on_page=True)
     context = {'contact_company': contact_company}
     return render(request, "funsite/contacts_company.html", context)
+
+
+def header_contacts(request):
+    """Controller that displays contacts on header"""
+    contact_office = Department.objects.filter(name_department='Офис Зеленоград')
+    context = {'contact_office': contact_office}
+    return render(request, "funsite/header.html", context)
