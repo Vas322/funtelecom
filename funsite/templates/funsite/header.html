@@ -1,19 +1,25 @@
 
-{% load thumbnail %}
 {% load static %}
 
 
-{% block header %}   
-<div class="row">
-  <div class="col-sm">
-    <div class="header">
-      <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
-       alt="logo"></a>
+{% block header %}  
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="header">
+        <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
+         alt="logo"></a>
+       </div>
+     </div>
+   </div>   
+   <div class="col-sm">
+     <div class="contacts">
+      <p>{{ phone_main_office_proc }}</p>
+       <p><a href="mailto:">{{ email_main_office_proc }}</a></p>       
      </div>
    </div>
  </div>
- {{ email_main_office }}
-   
-{{ phone_main_office }}
 </div>
+
 {% endblock header %}

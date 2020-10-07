@@ -1,0 +1,38 @@
+{% load static %}
+
+{% block footer %}
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 pt-3">
+				<ul class="footer-list">
+					<ol class="p-1 footer-list-item"><a href="{% url 'company_info' %}" >О нас</a></ol>
+					<ol class="p-1 footer-list-item"><a href="{% url 'contact_our_company' %}">Контакты</a></ol>
+					<ol class="p-1 footer-list-item"><a href="{% url 'all_news' %}">Новости</a></ol>
+					<ol class="p-1 footer-list-item"><a href="{% url 'all_brands' %}">Наши бренды</a></ol>					
+				</ul>
+			</div>
+			<div class="col-sm-3 pt-3 pl-3">
+				<ul class="footer-list">
+					<ol class="p-1 footer-list-item"><a href="https://b2b.funtelecom.ru/" target="_blank">Вход в B2B</a></ol>
+					<ol class="p-1 footer-list-item"><a href="#">Стать партнером</a></ol>
+					<ol class="p-1 footer-list-item"><a href="#">Регистрация проекта</a></ol>
+					<ol class="p-1 footer-list-item"><a href="#">Техподдержка</a></ol>					
+				</ul>
+			</div>									
+			
+			<div class="col-sm-6 text-left pt-3 pl-5">
+				<ul class="footer-list">					
+					<ol class="p-1 text-white">Адрес офиса: г. {{ city_main_office_proc }}, 
+					{{ street_main_office_proc }}, дом {{ number_house_main_office_proc }} </ol>
+					<ol class="p-1 text-white">Наш телефон: {{ phone_main_office_proc }}</ol>
+					<ol class="p-1 text-white footer-list-item">Наша почта: <a href="mailto:">{{ email_main_office_proc }}</a></ol>					
+					<ol class="p-1 text-white footer-list-item"><a href="{{access_map_link_proc}}" target="_blank">Схема проезда</a></ol>
+					<ol class="p-1  text-white font-italic">&copy; By Dmitrochenko, 2020 г. Все права защищены</ol>
+				</ul>
+			</div>					
+			</div>
+		</div>  
+	</div>  
+</div>
+{% endblock footer %}

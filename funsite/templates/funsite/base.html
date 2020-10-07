@@ -9,27 +9,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <title>{% block title %}Funtelecom - Главная страница{% endblock %}</title>
 </head>
-
 <body>
 
   <div class="wrapper" >
-    <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <div class="header">
-        <div class="logo"><a href="/"><img src="{% static 'funsite/logo_fun.png' %}"
-         alt="logo"></a>
-       </div>
-     </div>
-   </div>   
-   <div class="col-sm">
-     <div class="contacts">
-       <p>{{ phone_main_office }}</p>
-       <p>{{ email_main_office }}</p>
-     </div>
-   </div>
- </div>
-</div>
+    {% block header %}
+    {% include "funsite/header.html" %}
+    {% endblock header %}
 
  <nav class="navbar navbar-expand-lg navbar-light mb-0 h5">  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,9 +63,9 @@
 
   {% endblock %}
 </div>
-<div class="footer">
-  <p class="text-right font-italic text-white footer">&copy; By Dmitrochenko, 2020г.</p>    
-</div>
+    {% block footer %}
+    {% include "funsite/footer.html" %}
+    {% endblock footer %}
 </div>
 <style>
 .carousel-control-prev-icon {

@@ -22,10 +22,11 @@ body {
 	padding-right: 15px;
 	padding-top: 10px;
 }
+
 nav.navbar .dropdown:hover > .dropdown-menu {
  display: block; 
 } 
-@media only screen and (max-device-width: 992px){
+@media only screen and (max-device-width:  1140px){
     nav.navbar .dropdown:hover .dropdown-menu{
         display: none;
     }
@@ -128,6 +129,18 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   background-color: #5c7489;
   flex: 0 0 auto;
   margin-top: 20px;
+}
+.footer-list-item a{
+	color: #FFF;
+	text-decoration:none;
+	
+}
+.footer-list{
+	font-size: 11pt;
+}
+.footer-list-item a:hover{
+	color: #FFF;
+	text-decoration:none;
 }
 .wrapper {
   display: flex;
