@@ -10,14 +10,12 @@
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
 		</ol>
-	</nav>
-	{% for company in my_company_info %}
+	</nav>	
 	<div class="title-company">
-		<h2>{{ company.title }}</h2>
+		<h2>{{ my_company_info.title }}</h2>
 	</div>
 	<div class="description-company">
-		{{company.description}}
-	</div>
-	{% endfor %}
+		{{my_company_info.description}}
+	</div>	
 </div>
 {% endblock content %}

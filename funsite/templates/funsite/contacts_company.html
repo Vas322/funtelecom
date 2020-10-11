@@ -5,18 +5,19 @@
 {% block title %} Контакты {% endblock title %}
 
 {% block content %}
-<div class="container  p-3">
+<div class="container  pt-3">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+			<li class="breadcrumb-item">Наши контакты</li>
 		</ol>
 	</nav>
-	<div class="title-company display-4 mt-2">Контакты:</div>
+	<div class="title-company display-4 pt-2">Контакты:</div>
 	<div class="row">
-		
+		<div class="contact p-3">
 		{% for contact in contact_company %}
-		<div class="col-sm border m-2">
-			<div class="title-company ">
+		<div class="border">
+			<div class="title-company pl-2">
 				<h2>{{ contact.name_department }}</h2>
 			</div>
 			<div class="description-company">
@@ -26,8 +27,8 @@
 				Почта: {{ contact.email_department.email }}
 			</div>
 			<div class="p-2">
-				Телефон: {{ contact.phone_department.phone_number }} ext: 
-				{{ contact.phone_department.extension_number }}
+				Телефон: {{ contact.phone_department.phone_number|default_if_none:"-"}} ext: 
+				{{ contact.phone_department.extension_number|default_if_none:"-" }}
 			</div>
 			<div class="p-2">
 
@@ -43,7 +44,7 @@
 			</div>
 		</div>
 		{% endfor %}
-
+		</div>		
 	</div>
 </div>
 {% endblock content %}

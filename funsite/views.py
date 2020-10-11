@@ -44,7 +44,7 @@ def all_brands(request):
 
 def company_info(request):
     """Controller that displays the info about company"""
-    my_company_info = CompanyInfo.objects.all()
+    my_company_info = CompanyInfo.objects.get()
     context = {'my_company_info': my_company_info}
     return render(request, "funsite/company_info.html", context)
 
@@ -54,3 +54,10 @@ def contacts_our_company(request):
     contact_company = Department.objects.filter(published_on_page=True)
     context = {'contact_company': contact_company}
     return render(request, "funsite/contacts_company.html", context)
+
+
+def support_page(request):
+    """Controller that displays the info about support on page"""
+    support_info = Department.objects.get(email_department__email='support@funtelecom.ru')
+    context = {'support_info': support_info}
+    return render(request, "funsite/support_page.html", context)

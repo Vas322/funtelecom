@@ -100,6 +100,9 @@ class CompanyInfo(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название Компании')
     description = models.TextField(verbose_name='Описание компании')
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Инфо о компании'
         verbose_name_plural = 'Инфо о компании'
