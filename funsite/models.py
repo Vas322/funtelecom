@@ -208,8 +208,6 @@ class Phone(models.Model):
     phone_number = PhoneNumberField(verbose_name='Введите номер телефона')
     extension_number = models.PositiveIntegerField(verbose_name='Добавочный номер', blank=True, null=True,
                                                    validators=[MaxValueValidator(100000), MinValueValidator(1)])
-    type_number = models.ForeignKey('TypeNumberPhone', on_delete=models.CASCADE,
-                                    verbose_name='Тип телефона')
 
     def __str__(self):
         return str(self.phone_number)
@@ -219,22 +217,9 @@ class Phone(models.Model):
         verbose_name_plural = 'Телефоннные номера'
 
 
-class TypeNumberPhone(models.Model):
-    """The Model stores phone types information"""
-    type_number = models.CharField(max_length=30, verbose_name='Тип номера телефона',
-                                   help_text='Например, Рабочий.')
-
-    def __str__(self):
-        return self.type_number
-
-    class Meta:
-        verbose_name = 'Тип номера'
-        verbose_name_plural = 'Тип номера'
-
-
 class Partner(models.Model):
     """The Model stores partner information"""
-    name_partner_company = models.CharField(max_length=200, verbose_name='Название компании партнера')
+    name_partner_company = models.CharField(max_length=200, verbose_name='Название вашей компании')
     partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Телефон партнера')
     partner_email = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта партнера')
     partner_address = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес партнера')
@@ -255,7 +240,7 @@ class TargetRegistrationPartner(models.Model):
     """
     The model stores information about the purpose of registering a partner on the site
     """
-    title = models.CharField(max_length=100, verbose_name='Цель регистрации партнера',
+    title = models.CharField(max_length=100, verbose_name='Цель заявки',
                              help_text='Например, покупка товаров оптом.')
 
     def __str__(self):

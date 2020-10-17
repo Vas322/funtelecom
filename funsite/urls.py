@@ -1,7 +1,7 @@
 from django.urls import path
 
 from funsite.views import index, detail_brand, detail_news, all_news, all_brands, company_info, contacts_our_company, \
-    support_page
+    support_page, add_new_partner
 
 urlpatterns = [
     path('', index, name='index'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('company_info', company_info, name='company_info'),
     path('contacts_our_company', contacts_our_company, name='contact_our_company'),
     path('support_page/', support_page, name='support_page'),
+    path('add_new_partner/', add_new_partner, name='add_new_partner')
 ]

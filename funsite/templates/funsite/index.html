@@ -5,15 +5,8 @@
 {% block title %} Funtelecom - Главная страница {% endblock title %}
 
 {% block content %}
-<div class="container">
-	
+<div class="container">	
 	<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
-		<!-- Индикаторы -->
-		<ol class="carousel-indicators">
-			<li data-target="#carousel" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel" data-slide-to="1"></li>
-			<li data-target="#carousel" data-slide-to="2"></li>
-		</ol>
 		<div class="carousel-inner">
 			{% for carousel in carousel_list %}
 			{% if forloop.first %}
@@ -25,8 +18,7 @@
 				<a href="{{ carousel.link }}" target="_blank"><img src="{{ carousel.image_carousel.url }}" class=" d-block"></a>
 			</div>
 			{% endif %}
-			{% endfor %} 
-
+			{% endfor %}
 		</div>
 		<!-- Элементы управления -->
 		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -38,34 +30,28 @@
 			<span class="sr-only">Следующий</span>
 		</a>
 	</div>
-</div>
-
-
-<div class="all-news"><a href="{% url 'all_news' %}">Новости</a></div>
-<div class="container news">	
-	{% for news in news_list %}
-	<ins class="thumbnail">	
-		<div class="img-news border ">
-			<a href="{% url 'detail_news' pk=news.pk %}">
-				<img class="shadow" src="{{ news.image_news.url }}">
+	<div class="all-news"><a href="{% url 'all_news' %}">Новости</a></div>
+	<div class=" news">	
+		{% for news in news_list %}
+		<ins class="thumbnail">	
+			<div class="img-news border ">
+				<a href="{% url 'detail_news' pk=news.pk %}">
+					<img class="shadow" src="{{ news.image_news.url }}">
+				</a><br/>
+			</div>
+		</ins>
+		{% endfor %}	
+	</div>
+	<div class="all-brands"><a href="{% url 'all_brands' %}">Наши бренды</a></div>
+	<div class="brands">	
+		{% for brand in brand_list %}
+		<div class="child-brands">
+			<a href="{% url 'detail_brand' pk=brand.pk %}">
+				<img class="" src="{{ brand.image_brand.url }}">
 			</a><br/>
 		</div>
-	</ins>
-	{% endfor %}	
-</div>
-
-<div class="all-brands"><a href="{% url 'all_brands' %}">Наши бренды</a></div>
-
-<div class="container brands">	
-	{% for brand in brand_list %}
-	<div class="child-brands">
-		<a href="{% url 'detail_brand' pk=brand.pk %}">
-			<img class="" src="{{ brand.image_brand.url }}">
-		</a><br/>
+		{% endfor %}	
 	</div>
-	{% endfor %}	
-</div>
-<div class="container">
 	<div class="row">
 		{% for company in my_company_info %}
 		<div class="title-company">

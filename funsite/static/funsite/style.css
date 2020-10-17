@@ -45,11 +45,11 @@ nav.navbar .dropdown:hover > .dropdown-menu {
   display: block;
   width: 1100px;
   height: 400px;
-  margin: 5px;
+ padding-top: 10px;
 }
 
 .all-news, .all-brands{
-	margin: 10px;
+	;
 	font-size: 24pt;	
 	text-align: center;
 }
@@ -95,18 +95,20 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 .date{
   color: #5c7489;
 }
-.title-company{
+.title-company{	
 	border-bottom: 2px solid;
 	width: 70%;
 	border-color: #ee8121;
-	padding-top: 10px;
-	margin-bottom: 15px; 
+	padding-top: 15px;
+	padding-left: 15px;
 }
 .text-company{
 	overflow: hidden;
 	position: relative;
 	height: 100px;
 	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 .text-company:after {
 	content: "";

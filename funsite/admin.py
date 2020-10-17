@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Address, Country, \
-    City, Street, Phone, Partner, Email, TypeNumberPhone, TargetRegistrationPartner, PositionInMarket, Employee, \
+    City, Street, Phone, Partner, Email, TargetRegistrationPartner, PositionInMarket, Employee, \
     EmployeePosition
 
 
@@ -46,7 +46,7 @@ class CompanyInfoAdmin(admin.ModelAdmin):
 
 class DepartmentAdmin(admin.ModelAdmin):
     """Displaying the info about department in the admin panel"""
-    list_display = ('name_department', 'phone_department','email_department', 'working_hours', 'published_on_page')
+    list_display = ('name_department', 'phone_department', 'email_department', 'working_hours', 'published_on_page')
     list_display_links = ('name_department', 'phone_department', 'email_department')
 
 
@@ -60,31 +60,31 @@ class AddressAdmin(admin.ModelAdmin):
 class CountryAdmin(admin.ModelAdmin):
     """Displaying the info about country in the admin panel"""
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class CityAdmin(admin.ModelAdmin):
     """Displaying the info about city in the admin panel"""
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class StreetAdmin(admin.ModelAdmin):
     """Displaying the info about street in the admin panel"""
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class EmailAdmin(admin.ModelAdmin):
@@ -92,31 +92,18 @@ class EmailAdmin(admin.ModelAdmin):
     Hiding an email in the admin panel.But email is available when add related models
     """
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class TypeNumberPhoneAdmin(admin.ModelAdmin):
-    """
-    Hiding a TypeNumber Phone in the admin panel.
-    But TypeNumberPhone is available when add related models
-    """
-
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class PartnerAdmin(admin.ModelAdmin):
     """Displaying the info about partner in the admin panel"""
-    list_display = ('name_partner_company', 'target_registration', 'position_partner_on_market', 'partner_phone',
+    list_display = ('name_partner_company', 'position_partner_on_market', 'partner_phone',
                     'partner_email', 'partner_address')
-    search_fields = ['name_partner_company', 'target_registration', 'position_partner_on_market', 'partner_phone',
+    search_fields = ['name_partner_company', 'position_partner_on_market', 'partner_phone',
                      'partner_email', 'partner_address']
     list_display_links = ('name_partner_company', 'partner_address',)
 
@@ -126,11 +113,11 @@ class TargetRegistrationPartnerAdmin(admin.ModelAdmin):
     But TargetRegistrationPartner is available when add related models
     """
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class PositionInMarketAdmin(admin.ModelAdmin):
@@ -138,11 +125,11 @@ class PositionInMarketAdmin(admin.ModelAdmin):
     But PositionInMarket is available when add related models
     """
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 class EmployeeAdmin(admin.ModelAdmin):
@@ -150,7 +137,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'employee_position', 'email_employee', 'phone_employee', 'name_partner',
                     'address_employee')
     search_fields = ['last_name', 'employee_position', 'email_employee', 'name_partner']
-    list_display_links = ('address_employee',)
+    list_display_links = ('address_employee', 'last_name')
 
 
 class EmployeePositionAdmin(admin.ModelAdmin):
@@ -158,11 +145,11 @@ class EmployeePositionAdmin(admin.ModelAdmin):
         But EmployeePosition is available when add related models
         """
 
-    def get_model_perms(self, request):
-        """
+    """def get_model_perms(self, request):
+        
         Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
+        
+        return {}"""
 
 
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
@@ -177,7 +164,6 @@ admin.site.register(Street, StreetAdmin)
 admin.site.register(Phone, CountryAdmin)
 admin.site.register(Email, EmailAdmin)
 admin.site.register(Partner, PartnerAdmin)
-admin.site.register(TypeNumberPhone, TypeNumberPhoneAdmin)
 admin.site.register(TargetRegistrationPartner, TargetRegistrationPartnerAdmin)
 admin.site.register(PositionInMarket, PositionInMarketAdmin)
 admin.site.register(Employee, EmployeeAdmin)
