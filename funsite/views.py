@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.contrib import messages
 
 from funsite.forms import PartnerForm, PhoneNumberForm, EmailForm, AddressForm, CountryForm, CityForm, \
-    TargetRegistrationPartnerForm, PositionInMarketForm
+    TargetRegistrationPartnerForm, PositionInMarketForm, EmployeeForm
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department
 
 
@@ -70,6 +70,7 @@ def support_page(request):
 def add_new_partner(request):
     """The controller that processes the form to create a new partner."""
     if request.method == 'POST':
+        employee_form = EmployeeForm(request.POST)
         part_form = PartnerForm(request.POST)
         phone_form = PhoneNumberForm(request.POST)
         email_form = EmailForm(request.POST)
@@ -80,15 +81,17 @@ def add_new_partner(request):
         position_form = PositionInMarketForm(request.POST)
         if part_form.is_valid() and phone_form.is_valid() and email_form.is_valid() and address_form.is_valid() \
                 and country_form.is_valid() and city_form.is_valid() and target_form.is_valid() \
-                and position_form.is_valid():
+                and position_form.is_valid() and employee_form.is_valid():
+
             email_obj = email_form.save()
-            part_obj = part_form.save(commit=False)
-            part_obj.partner_email = email_obj
+            employee_obj = employee_form.save(commit=False)
+            employee_obj.email_employee = email_obj
 
             phone_obj = phone_form.save()
-            part_obj.partner_phone = phone_obj
+            employee_obj.phone_employee = phone_obj
 
             target_obj = target_form.save()
+            part_obj = part_form.save(commit=False)
             part_obj.target_registration = target_obj
 
             position_obj = position_form.save()
@@ -102,13 +105,16 @@ def add_new_partner(request):
             address_obj.city = city_obj
 
             address_obj = address_form.save()
-            part_obj.partner_address = address_obj
+            employee_obj.address_employee = address_obj
 
             part_form.save()
+
+            employee_form.save()
 
             messages.add_message(request, messages.SUCCESS, 'Заявка на сотрудничество отправлена!')
             return redirect('index')
     else:
+        employee_form = EmployeeForm()
         part_form = PartnerForm()
         email_form = EmailForm()
         phone_form = PhoneNumberForm()
@@ -119,5 +125,5 @@ def add_new_partner(request):
         city_form = CityForm()
     context = {'part_form': part_form, 'phone_form': phone_form, 'email_form': email_form,
                'address_form': address_form, 'country_form': country_form, 'city_form': city_form,
-               'target_form': target_form, 'position_form': position_form}
+               'target_form': target_form, 'position_form': position_form, 'employee_form': employee_form}
     return render(request, 'funsite/add_new_partner.html', context)

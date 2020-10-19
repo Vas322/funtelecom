@@ -1,7 +1,7 @@
 from django import forms
 
 from funsite.models import Partner, Employee, Phone, Email, Address, Country, City, TargetRegistrationPartner, \
-    PositionInMarket
+    PositionInMarket, EmployeePosition
 
 
 class PartnerForm(forms.ModelForm):
@@ -66,3 +66,14 @@ class PositionInMarketForm(forms.ModelForm):
     class Meta:
         model = PositionInMarket
         fields = ('title',)
+
+
+class EmployeeForm(forms.ModelForm):
+    """The form saves information about the employee"""
+
+    class Meta:
+        model = Employee
+        fields = ('last_name', 'first_name', 'employee_position')
+
+
+

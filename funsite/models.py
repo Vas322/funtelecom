@@ -220,8 +220,8 @@ class Phone(models.Model):
 class Partner(models.Model):
     """The Model stores partner information"""
     name_partner_company = models.CharField(max_length=200, verbose_name='Название вашей компании')
-    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Телефон партнера')
-    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта партнера')
+    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE, null=True, verbose_name='Телефон партнера')
+    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE, null=True, verbose_name='Эл.почта партнера')
     partner_address = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес партнера')
     target_registration = models.ForeignKey('TargetRegistrationPartner', on_delete=models.CASCADE, null=True,
                                             verbose_name='Цель регистрации')
@@ -271,7 +271,7 @@ class Employee(models.Model):
                                           verbose_name='Должность сотрудника')
     email_employee = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта сотрудника')
     phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
-    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, verbose_name='Адрес сотрудника')
+    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес сотрудника')
     name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
                                      verbose_name='Работает в компании')
 
