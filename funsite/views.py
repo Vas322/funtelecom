@@ -1,10 +1,12 @@
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib import messages
 
-from funsite.forms import PartnerForm, PhoneNumberForm, EmailForm, AddressForm, CountryForm, CityForm, \
-    TargetRegistrationPartnerForm, PositionInMarketForm, EmployeeForm
-from funsite.models import Brand, News, Carousel, CompanyInfo, Department
+from funsite.forms import PartnerForm, PhoneNumberForm, EmailForm, AddressForm, CountryForm, CityForm, EmployeeForm, \
+    MailToSupportForm
+from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, Email, Phone, City
 
 
 def index(request):
@@ -77,53 +79,63 @@ def add_new_partner(request):
         address_form = AddressForm(request.POST)
         country_form = CountryForm(request.POST)
         city_form = CityForm(request.POST)
-        target_form = TargetRegistrationPartnerForm(request.POST)
-        position_form = PositionInMarketForm(request.POST)
         if part_form.is_valid() and phone_form.is_valid() and email_form.is_valid() and address_form.is_valid() \
-                and country_form.is_valid() and city_form.is_valid() and target_form.is_valid() \
-                and position_form.is_valid() and employee_form.is_valid():
-
-            email_obj = email_form.save()
+                and country_form.is_valid() and city_form.is_valid() and employee_form.is_valid():
+            email_obj, created = Email.objects.get_or_create(email=email_form.cleaned_data["email"])
             employee_obj = employee_form.save(commit=False)
             employee_obj.email_employee = email_obj
 
-            phone_obj = phone_form.save()
+            phone_obj, created = Phone.objects.get_or_create(phone_number=phone_form.cleaned_data["phone_number"])
             employee_obj.phone_employee = phone_obj
 
-            target_obj = target_form.save()
-            part_obj = part_form.save(commit=False)
-            part_obj.target_registration = target_obj
-
-            position_obj = position_form.save()
-            part_obj.position_partner_on_market = position_obj
-
-            country_obj = country_form.save()
+            country_obj, created = Country.objects.get_or_create(name_country=country_form.cleaned_data["name_country"])
             address_obj = address_form.save(commit=False)
             address_obj.country = country_obj
 
-            city_obj = city_form.save()
+            city_obj, created = City.objects.get_or_create(name_city=city_form.cleaned_data["name_city"])
             address_obj.city = city_obj
 
             address_obj = address_form.save()
             employee_obj.address_employee = address_obj
 
             part_form.save()
-
             employee_form.save()
 
             messages.add_message(request, messages.SUCCESS, 'Заявка на сотрудничество отправлена!')
-            return redirect('index')
+            return render(request, 'funsite/success_add_new_partner.html')
     else:
         employee_form = EmployeeForm()
         part_form = PartnerForm()
         email_form = EmailForm()
         phone_form = PhoneNumberForm()
-        target_form = TargetRegistrationPartnerForm()
-        position_form = PositionInMarketForm()
         address_form = AddressForm()
         country_form = CountryForm()
         city_form = CityForm()
     context = {'part_form': part_form, 'phone_form': phone_form, 'email_form': email_form,
                'address_form': address_form, 'country_form': country_form, 'city_form': city_form,
-               'target_form': target_form, 'position_form': position_form, 'employee_form': employee_form}
+               'employee_form': employee_form}
     return render(request, 'funsite/add_new_partner.html', context)
+
+
+def mail_to_support(request):
+    """The controller that sending an email to support"""
+    if request.method == 'POST':
+        mail_to_support_form = MailToSupportForm(request.POST)
+        if mail_to_support_form.is_valid():
+            subject = mail_to_support_form.cleaned_data['subject']
+            name = mail_to_support_form.cleaned_data['name']
+            sender = mail_to_support_form.cleaned_data['sender']
+            equipment_name = mail_to_support_form.cleaned_data['equipment_name']
+            serial_number = mail_to_support_form.cleaned_data['serial_number']
+            message = 'Письмо было отправлено с сайта www.funtelecom.ru.\r\n От %s.\r\nАдрес для ответа: %s.\r\n'\
+                      'Наименование оборудования: %s.\r\nСерийный номер оборудования: %s.\r\nОписание проблемы:'\
+                      % (sender, name, equipment_name, serial_number)
+            message += mail_to_support_form.cleaned_data['message']
+            recipients = ['dmitrochenko.vasiliy@gmail.com']
+            mail_to_support_form.save()
+            send_mail(subject, message, sender, recipients, fail_silently=False)
+            return render(request, 'funsite/success_mail_to_support.html')
+    else:
+        mail_to_support_form = MailToSupportForm()
+    context = {'mail_to_support_form': mail_to_support_form}
+    return render(request, 'funsite/mail_to_support.html', context)

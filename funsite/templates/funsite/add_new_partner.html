@@ -7,8 +7,14 @@
 
 {% block content %}
 <div class="container">
-	<div class="row pl-3">
+	<div class="row p-3">
 		<div class="col-sm-9">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+					<li class="breadcrumb-item">Стать партнером</li>
+				</ol>
+			</nav>
 		<form class="" action= "{% url 'add_new_partner' %}" method="post">
 			{% csrf_token %}
 				
@@ -17,9 +23,7 @@
 				{% bootstrap_form country_form layout='horizontal' %}	
 				{% bootstrap_form city_form layout='horizontal' %}			
 				{% bootstrap_form email_form layout='horizontal' %}
-				{% bootstrap_form phone_form layout='horizontal' %}
-				{% bootstrap_form target_form layout='horizontal' %}
-				{% bootstrap_form position_form layout='horizontal' %}							
+				{% bootstrap_form phone_form layout='horizontal' %}							
 
 			{% buttons submit='Стать партнером' %} {% endbuttons %}
 		</form>

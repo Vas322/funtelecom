@@ -1,0 +1,24 @@
+{% extends 'funsite/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %} Funtelecom - Успешно отправлено {% endblock title %}
+
+{% block content %}
+<div class="container">
+	<div class="row p-3">
+		<div class="col-sm-12">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'add_new_partner' %}">Стать партнером</a></li>
+					<li class="breadcrumb-item">Новый партнер</li>
+				</ol>
+			</nav>
+			<div class="alert alert-success" role="alert">
+				Ваше обращение принято!
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

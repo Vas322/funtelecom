@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 from os.path import splitext
 from PIL import Image
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -156,7 +156,8 @@ class Address(models.Model):
 
 class Country(models.Model):
     """The model describes the country"""
-    name_country = models.CharField(max_length=56, verbose_name='Название страны')
+    name_country = models.CharField(max_length=56, verbose_name='Название страны',
+                                    validators=[RegexValidator(regex=r'^[a-zA-Zа-яА-Я]+$')])
 
     def __str__(self):
         return self.name_country
@@ -168,7 +169,8 @@ class Country(models.Model):
 
 class City(models.Model):
     """The model describes the city"""
-    name_city = models.CharField(max_length=56, verbose_name='Название города')
+    name_city = models.CharField(max_length=56, verbose_name='Название города',
+                                 validators=[RegexValidator(regex=r'^[a-zA-Zа-яА-Я0-9]+$')])
 
     def __str__(self):
         return self.name_city
@@ -181,6 +183,7 @@ class City(models.Model):
 class Street(models.Model):
     """The model describes the street"""
     name_street = models.CharField(max_length=56, verbose_name='Название улицы',
+                                   validators=[RegexValidator(regex=r'^[a-zA-Zа-яА-Я0-9]+$')],
                                    help_text='Если в списке нет улицы, то внесите ее нажав на "+"')
 
     def __str__(self):
@@ -220,13 +223,10 @@ class Phone(models.Model):
 class Partner(models.Model):
     """The Model stores partner information"""
     name_partner_company = models.CharField(max_length=200, verbose_name='Название вашей компании')
-    partner_phone = models.ForeignKey('Phone', on_delete=models.CASCADE, null=True, verbose_name='Телефон партнера')
-    partner_email = models.ForeignKey('Email', on_delete=models.CASCADE, null=True, verbose_name='Эл.почта партнера')
-    partner_address = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес партнера')
-    target_registration = models.ForeignKey('TargetRegistrationPartner', on_delete=models.CASCADE, null=True,
-                                            verbose_name='Цель регистрации')
-    position_partner_on_market = models.ForeignKey('PositionInMarket', on_delete=models.CASCADE, null=True,
-                                                   verbose_name='Позиция на рынке', help_text='Например, "Интегратор"')
+    target_registration = models.CharField(max_length=100, verbose_name='Цель заявки', null=True,
+                                           help_text='Например, покупка товаров оптом.')
+    position_partner_on_market = models.CharField(max_length=100, verbose_name='Позиция на рынке', null=True,
+                                                  help_text='Например, "Интегратор"')
 
     def __str__(self):
         return self.name_partner_company
@@ -236,42 +236,18 @@ class Partner(models.Model):
         verbose_name_plural = 'Партнеры'
 
 
-class TargetRegistrationPartner(models.Model):
-    """
-    The model stores information about the purpose of registering a partner on the site
-    """
-    title = models.CharField(max_length=100, verbose_name='Цель заявки',
-                             help_text='Например, покупка товаров оптом.')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Цель регистрации'
-        verbose_name_plural = 'Цели регистрации'
-
-
-class PositionInMarket(models.Model):
-    """The model stores information about partner's position in the market"""
-    title = models.CharField(max_length=100, verbose_name='Позиция на рынке', help_text='Например, "Интегратор"')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Позиция на рынке'
-        verbose_name_plural = 'Позиция на рынке'
-
-
 class Employee(models.Model):
     """The model stores information about partner's employee"""
-    last_name = models.CharField(max_length=100, verbose_name='Фамилия')
-    first_name = models.CharField(max_length=100, verbose_name='Имя')
+    last_name = models.CharField(max_length=100, verbose_name='Фамилия',
+                                 validators=[RegexValidator(regex=r'^[a-zA-Zа-яА-Я]+$')])
+    first_name = models.CharField(max_length=100, verbose_name='Имя',
+                                  validators=[RegexValidator(regex=r'^[a-zA-Zа-яА-Я]+$')])
     employee_position = models.ForeignKey('EmployeePosition', on_delete=models.CASCADE,
                                           verbose_name='Должность сотрудника')
     email_employee = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта сотрудника')
     phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
-    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, null=True, verbose_name='Адрес сотрудника')
+    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, null=True,
+                                         verbose_name='Адрес сотрудника')
     name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
                                      verbose_name='Работает в компании')
 
@@ -293,3 +269,20 @@ class EmployeePosition(models.Model):
     class Meta:
         verbose_name = 'Должность сотрудника'
         verbose_name_plural = 'Должность сотрудника'
+
+
+class MailToSupport(models.Model):
+    """The model sending email to support"""
+    subject = models.CharField(max_length=100, verbose_name='Тема письма')
+    name = models.CharField(max_length=30, null=True, verbose_name='Ваше имя')
+    equipment_name = models.CharField(max_length=100, null=True, verbose_name='Наименование оборудования')
+    serial_number = models.CharField(max_length=50, null=True, verbose_name='Серийный номер оборудования')
+    sender = models.EmailField(max_length=150, verbose_name='Ваш email для ответа')
+    message = models.TextField(verbose_name='Детально опишите вашу проблему')
+
+    def __str__(self):
+        return self.subject
+
+    class Meta:
+        verbose_name = 'Письмо в техподдержку'
+        verbose_name_plural = 'Письма в техподдержку'

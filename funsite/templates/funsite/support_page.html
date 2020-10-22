@@ -40,10 +40,10 @@
 		</div>
 	</div>
 	<div> 
-		<p class="pt-3">Написать в техническую поддержку:<a href="mailto:">{{ support_info.email_department }}</a></p>
+		<p class="pt-3">Написать письмо в техническую поддержку:<a href="mailto:">{{ support_info.email_department }}</a></p>
 	</div>
 	<div>
-		<p>Задать свой вопрос технической поддержке можно через форму <a href="#">Вопросы и ответы</a></p>
+		<p>Задать свой вопрос технической поддержке можно через форму <a href=" {% url 'mail_to_support' %}">Вопросы и ответы</a></p>
 	</div>	
 </div>
 {% endblock content %}

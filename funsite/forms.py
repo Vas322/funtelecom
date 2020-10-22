@@ -1,7 +1,6 @@
 from django import forms
 
-from funsite.models import Partner, Employee, Phone, Email, Address, Country, City, TargetRegistrationPartner, \
-    PositionInMarket, EmployeePosition
+from funsite.models import Partner, Employee, Phone, Email, Address, Country, City, EmployeePosition, MailToSupport
 
 
 class PartnerForm(forms.ModelForm):
@@ -9,7 +8,7 @@ class PartnerForm(forms.ModelForm):
 
     class Meta:
         model = Partner
-        fields = ('name_partner_company',)
+        fields = ('name_partner_company', 'target_registration', 'position_partner_on_market')
 
 
 class PhoneNumberForm(forms.ModelForm):
@@ -52,22 +51,6 @@ class CityForm(forms.ModelForm):
         fields = ('name_city',)
 
 
-class TargetRegistrationPartnerForm(forms.ModelForm):
-    """The form saves information about the target registration in the company"""
-
-    class Meta:
-        model = TargetRegistrationPartner
-        fields = ('title',)
-
-
-class PositionInMarketForm(forms.ModelForm):
-    """The form saves information about the position in market"""
-
-    class Meta:
-        model = PositionInMarket
-        fields = ('title',)
-
-
 class EmployeeForm(forms.ModelForm):
     """The form saves information about the employee"""
 
@@ -76,4 +59,7 @@ class EmployeeForm(forms.ModelForm):
         fields = ('last_name', 'first_name', 'employee_position')
 
 
-
+class MailToSupportForm(forms.ModelForm):
+    class Meta:
+        model = MailToSupport
+        fields = ['subject', 'name', 'sender', 'equipment_name', 'serial_number', 'message']
