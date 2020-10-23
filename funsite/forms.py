@@ -60,6 +60,17 @@ class EmployeeForm(forms.ModelForm):
 
 
 class MailToSupportForm(forms.ModelForm):
+    """The form saves information about the message to technical support"""
+    subject = forms.CharField(max_length=100, label='', widget=forms.TextInput(attrs={'placeholder': 'Тема письма'}))
+    name = forms.CharField(max_length=30, label='', widget=forms.TextInput(attrs={'placeholder': 'Ваше имя'}))
+    equipment_name = forms.CharField(max_length=100, label='',
+                                     widget=forms.TextInput(attrs={'placeholder': 'Наименование оборудования'}))
+    serial_number = forms.CharField(max_length=50, label='',
+                                    widget=forms.TextInput(attrs={'placeholder': 'Серийный номер оборудования'}))
+    sender = forms.EmailField(max_length=150, label='',
+                              widget=forms.TextInput(attrs={'placeholder': 'Ваш email для ответа'}))
+    message = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Детально опишите вашу проблему'}))
+
     class Meta:
         model = MailToSupport
         fields = ['subject', 'name', 'sender', 'equipment_name', 'serial_number', 'message']

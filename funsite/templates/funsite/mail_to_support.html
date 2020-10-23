@@ -7,21 +7,22 @@
 
 {% block content %}
 <div class="container">
-	<div class="row p-3">
-		<div class="col-sm-9">
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
-					<li class="breadcrumb-item"><a href="{% url 'mail_to_support' %}">Техподдержка</a></li>
-					<li class="breadcrumb-item">Обращение в техподдержку</li>
-				</ol>
-			</nav>
+	<nav class="pt-3" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная страница</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'mail_to_support' %}">Техподдержка</a></li>
+			<li class="breadcrumb-item">Обращение в техподдержку</li>
+		</ol>
+	</nav>
+	<div class="row justify-content-md-center">
+		<div class="col-sm-6">
+			
 			<form class="" action= "{% url 'mail_to_support' %}" method="post">
 				{% csrf_token %}
 				
-				{% bootstrap_form mail_to_support_form layout='horizontal' %}										
+				{% bootstrap_form mail_to_support_form  %}										
 
-				{% buttons submit='Отправить вопрос' %} {% endbuttons %}
+				<button type="submit" class="btn btn-primary btn-block">Отправить запрос</button>
 			</form>
 		</div>
 	</div>

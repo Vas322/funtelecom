@@ -30,32 +30,41 @@
 			<span class="sr-only">Следующий</span>
 		</a>
 	</div>
-	<div class="all-news"><a href="{% url 'all_news' %}">Новости</a></div>
-	<div class=" news">	
-		{% for news in news_list %}
-		<ins class="thumbnail">	
-			<div class="img-news border ">
-				<a href="{% url 'detail_news' pk=news.pk %}">
-					<img class="shadow" src="{{ news.image_news.url }}">
-				</a><br/>
+	<div class="all-news-title text-left pt-3"><a href="{% url 'all_news' %}">Новости</a></div>
+	
+	<div class="row px-3">
+		<div class="news pt-3">	
+			{% for news in news_list %}
+			<div class="card card-news">
+				<img src="{{ news.image_news.url }}" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title text-center">{{news.title}}</h5>
+					<a href="{% url 'detail_news' pk=news.pk %}" class="btn btn-primary btn-block">Подробнее</a>
+				</div>
 			</div>
-		</ins>
-		{% endfor %}	
-	</div>
-	<div class="all-brands"><a href="{% url 'all_brands' %}">Наши бренды</a></div>
-	<div class="brands">	
-		{% for brand in brand_list %}
-		<div class="child-brands">
-			<a href="{% url 'detail_brand' pk=brand.pk %}">
-				<img class="" src="{{ brand.image_brand.url }}">
-			</a><br/>
+			{% endfor %}	
 		</div>
-		{% endfor %}	
 	</div>
-	<div class="row">
-		{% for company in my_company_info %}
-		<div class="title-company">
-			<a href="{% url 'company_info' %}"><h2>О нас</h2></a>
+
+	<div class="all-brands-title text-left pt-3"><a href="{% url 'all_brands' %}">Наши бренды</a></div>
+
+	<div class="brands pt-3">
+		{% for brand in brand_list %}
+		<a class="text-decoration-none" href="{% url 'detail_brand' pk=brand.pk %}">
+			<div class="card card-brands px-2">			
+				<img src="{{ brand.image_brand.url }}" class="card-img-top card-img-top-brands">
+				<div class="card-body">
+					<p class="card-text text-center text-info">{{ brand.name }}</p>
+				</div>			
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+
+	<div class="row px-3">			
+		<div class="title-company text-left pt-3">
+			{% for company in my_company_info %}
+			<a href="{% url 'company_info' %}">О нас</a>
 		</div>
 		<div class="text-company">
 			<p>{{company.description}}</p>

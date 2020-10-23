@@ -134,6 +134,7 @@ def mail_to_support(request):
             recipients = ['dmitrochenko.vasiliy@gmail.com']
             mail_to_support_form.save()
             send_mail(subject, message, sender, recipients, fail_silently=False)
+            messages.add_message(request, messages.SUCCESS, 'Заявка в техподдержку отправлена!')
             return render(request, 'funsite/success_mail_to_support.html')
     else:
         mail_to_support_form = MailToSupportForm()

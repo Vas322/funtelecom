@@ -16,7 +16,11 @@
 				</ol>
 			</nav>
 			<div class="alert alert-success" role="alert">
-				Ваше обращение принято!
+				{% if messages %}				
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+				{% endif %} 
 			</div>
 		</div>
 	</div>
