@@ -68,15 +68,18 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 .brands{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	justify-content: stretch; 
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
 	grid-gap: 10px;
+}
+.card-brands{
+
 }
 .card-brands:hover {
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	width: 102%;	
 }
 .card-img-top-brands{
-	height: 150px;
+	height: 150px;	
 }
 .news-all,.news-detail, .brand-all {
 	box-shadow: 0 0 10px #c5c5c5;
@@ -94,8 +97,8 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 }
 .news{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 31fr)); 
+	grid-gap: 20px;
 }
 .img-news {
 	width: 100%;
