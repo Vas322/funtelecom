@@ -15,12 +15,10 @@
 		</ol>
 	</nav>
 	<div class="row justify-content-md-center">
-		<div class="col-sm-6">
-			
+		<div class="col-sm-6">			
 			<form class="" action= "{% url 'mail_to_support' %}" method="post">
-				{% csrf_token %}
-				
-				{% bootstrap_form mail_to_support_form  %}										
+				{% csrf_token %}				
+				{% bootstrap_form mail_to_support_form  %}													
 
 				<button type="submit" class="btn btn-primary btn-block">Отправить запрос</button>
 			</form>

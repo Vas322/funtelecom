@@ -283,7 +283,11 @@ class MailToSupport(models.Model):
     def __str__(self):
         return self.subject
 
-
     class Meta:
         verbose_name = 'Письмо в техподдержку'
         verbose_name_plural = 'Письма в техподдержку'
+
+
+class ProjectRegistration(models.Model):
+    """The model stores information about project registration forms."""
+    pass

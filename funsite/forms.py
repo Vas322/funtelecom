@@ -1,10 +1,19 @@
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from funsite.models import Partner, Employee, Phone, Email, Address, Country, City, EmployeePosition, MailToSupport
 
 
 class PartnerForm(forms.ModelForm):
     """The form saves information about name the new partner in the database."""
+    name_partner_company = forms.CharField(max_length=200, label='',
+                                           widget=forms.TextInput(attrs={'placeholder': 'Название вашей компании'}))
+    target_registration = forms.CharField(max_length=100, label='',
+                                          widget=forms.TextInput(attrs={'placeholder': 'Цель заявки'}),
+                                          help_text='Например, покупка товаров оптом.')
+    position_partner_on_market = forms.CharField(max_length=100, label='',
+                                                 widget=forms.TextInput(attrs={'placeholder': 'Позиция на рынке'}),
+                                                 help_text='Например, "Интегратор"')
 
     class Meta:
         model = Partner
@@ -13,6 +22,10 @@ class PartnerForm(forms.ModelForm):
 
 class PhoneNumberForm(forms.ModelForm):
     """The form saves information about the phone in the database."""
+    phone_number = forms.CharField(max_length=13, label='',
+                                   widget=forms.TextInput(attrs={'placeholder': 'Введите номер телефона'}))
+    extension_number = forms.CharField(max_length=10, label='',
+                                       widget=forms.TextInput(attrs={'placeholder': 'Введите ваш добавочный номер'}))
 
     class Meta:
         model = Phone
@@ -21,6 +34,8 @@ class PhoneNumberForm(forms.ModelForm):
 
 class EmailForm(forms.ModelForm):
     """The form saves information about the email in the database."""
+    email = forms.CharField(max_length=100, label='',
+                            widget=forms.TextInput(attrs={'placeholder': 'Введите ваш email'}))
 
     class Meta:
         model = Email
@@ -37,6 +52,8 @@ class AddressForm(forms.ModelForm):
 
 class CountryForm(forms.ModelForm):
     """The form saves information about the address in the database."""
+    name_country = forms.CharField(max_length=100, label='',
+                                   widget=forms.TextInput(attrs={'placeholder': 'Введите вашу страну'}))
 
     class Meta:
         model = Country
@@ -45,6 +62,8 @@ class CountryForm(forms.ModelForm):
 
 class CityForm(forms.ModelForm):
     """The form saves information about the address in the database."""
+    name_city = forms.CharField(max_length=100, label='',
+                                widget=forms.TextInput(attrs={'placeholder': 'Введите ваш город'}))
 
     class Meta:
         model = City
