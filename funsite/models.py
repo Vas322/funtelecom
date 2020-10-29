@@ -191,7 +191,7 @@ class Street(models.Model):
 
     class Meta:
         verbose_name = 'Улица'
-        verbose_name_plural = 'Улица'
+        verbose_name_plural = 'Улицы'
 
 
 class Email(models.Model):
@@ -223,10 +223,12 @@ class Phone(models.Model):
 class Partner(models.Model):
     """The Model stores partner information"""
     name_partner_company = models.CharField(max_length=200, verbose_name='Название вашей компании')
-    target_registration = models.CharField(max_length=100, verbose_name='Цель заявки', null=True,
+    target_registration = models.CharField(max_length=100, verbose_name='Цель заявки',
                                            help_text='Например, покупка товаров оптом.')
-    position_partner_on_market = models.CharField(max_length=100, verbose_name='Позиция на рынке', null=True,
+    position_partner_on_market = models.CharField(max_length=100, verbose_name='Позиция на рынке',
                                                   help_text='Например, "Интегратор"')
+    name_employee = models.ForeignKey('Employee', on_delete=models.CASCADE, null=True,
+                                      verbose_name='Сотрудник')
 
     def __str__(self):
         return self.name_partner_company
@@ -248,8 +250,6 @@ class Employee(models.Model):
     phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
     address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, null=True,
                                          verbose_name='Адрес сотрудника')
-    name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
-                                     verbose_name='Работает в компании')
 
     def __str__(self):
         return self.last_name
@@ -274,7 +274,7 @@ class EmployeePosition(models.Model):
 class MailToSupport(models.Model):
     """The model sending email to support"""
     subject = models.CharField(max_length=100, verbose_name='Тема письма')
-    name = models.CharField(max_length=30, null=True, verbose_name='Ваше имя')
+    name = models.CharField(max_length=30, null=True, verbose_name='ФИО')
     equipment_name = models.CharField(max_length=100, null=True, verbose_name='Наименование оборудования')
     serial_number = models.CharField(max_length=50, null=True, verbose_name='Серийный номер оборудования')
     sender = models.EmailField(max_length=150, verbose_name='Ваш email для ответа')

@@ -97,7 +97,7 @@ def add_new_partner(request):
 
             address_obj = address_form.save()
             employee_obj.address_employee = address_obj
-
+            address_form.save()
             part_form.save()
             employee_form.save()
 
