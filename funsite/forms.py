@@ -1,7 +1,6 @@
 from django import forms
-from django.core.validators import MaxValueValidator, MinValueValidator
 
-from funsite.models import Partner, Employee, Phone, Email, Address, Country, City, EmployeePosition, MailToSupport
+from funsite.models import Partner, Employee, Phone, Email, Country, City, MailToSupport
 
 
 class PartnerForm(forms.ModelForm):
@@ -40,14 +39,6 @@ class EmailForm(forms.ModelForm):
     class Meta:
         model = Email
         fields = ('email',)
-
-
-class AddressForm(forms.ModelForm):
-    """The form saves information about the address in the database."""
-
-    class Meta:
-        model = Address
-        fields = ('title',)
 
 
 class CountryForm(forms.ModelForm):

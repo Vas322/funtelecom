@@ -32,15 +32,14 @@
 			</div>
 			<div class="p-2">
 
-				Адрес: {{ contact.department_address.country.name_country }},
-				{{ contact.department_address.city.name_city }},
-				{{ contact.department_address.street.name_street }},
-				дом {{ contact.department_address.number_house|default_if_none:"-" }}, 
-				строение {{ contact.department_address.number_flat|default_if_none:"-" }},
+				Адрес: {{ contact.department_country.name_country }},
+				{{ contact.department_city.name_city }},
+				{{ contact.department_street.name_street }},
+				дом {{ contact.department_number_house.number_house|default_if_none:"-" }},				
 				комната/офис {{ contact.department_address.number_office|default_if_none:"-" }}
 			</div>
 			<div>
-			 <a class="p-2" href="{{ contact.department_address.access_map_link|default_if_none:'/contacts_our_company' }}" target="_blank">Схема проезда</a>
+			 <a class="p-2" href="{{ contact.department_access_map_link|default_if_none:'/contacts_our_company' }}" target="_blank">Схема проезда</a>
 			</div>
 		</div>
 		{% endfor %}

@@ -4,9 +4,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib import messages
 
-from funsite.forms import PartnerForm, PhoneNumberForm, EmailForm, AddressForm, CountryForm, CityForm, EmployeeForm, \
+from funsite.forms import PartnerForm, PhoneNumberForm, EmailForm, CountryForm, CityForm, EmployeeForm, \
     MailToSupportForm
-from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, Email, Phone, City
+from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, Email, Phone, City, Employee, \
+    Partner
 
 
 def index(request):
@@ -76,10 +77,9 @@ def add_new_partner(request):
         part_form = PartnerForm(request.POST)
         phone_form = PhoneNumberForm(request.POST)
         email_form = EmailForm(request.POST)
-        address_form = AddressForm(request.POST)
         country_form = CountryForm(request.POST)
         city_form = CityForm(request.POST)
-        if part_form.is_valid() and phone_form.is_valid() and email_form.is_valid() and address_form.is_valid() \
+        if part_form.is_valid() and phone_form.is_valid() and email_form.is_valid() \
                 and country_form.is_valid() and city_form.is_valid() and employee_form.is_valid():
             email_obj, created = Email.objects.get_or_create(email=email_form.cleaned_data["email"])
             employee_obj = employee_form.save(commit=False)
@@ -89,16 +89,17 @@ def add_new_partner(request):
             employee_obj.phone_employee = phone_obj
 
             country_obj, created = Country.objects.get_or_create(name_country=country_form.cleaned_data["name_country"])
-            address_obj = address_form.save(commit=False)
-            address_obj.country = country_obj
+            employee_obj.country_employee = country_obj
 
             city_obj, created = City.objects.get_or_create(name_city=city_form.cleaned_data["name_city"])
-            address_obj.city = city_obj
+            employee_obj.city_employee = city_obj
 
-            address_obj = address_form.save()
-            employee_obj.address_employee = address_obj
-            address_form.save()
-            part_form.save()
+            part_obj, created = Partner.objects.get_or_create(
+                name_partner_company=part_form.cleaned_data['name_partner_company'],
+                target_registration=part_form.cleaned_data['target_registration'],
+                position_partner_on_market=part_form.cleaned_data['position_partner_on_market'])
+            employee_obj.name_partner = part_obj
+
             employee_form.save()
 
             messages.add_message(request, messages.SUCCESS, 'Заявка на сотрудничество отправлена!')
@@ -108,12 +109,10 @@ def add_new_partner(request):
         part_form = PartnerForm()
         email_form = EmailForm()
         phone_form = PhoneNumberForm()
-        address_form = AddressForm()
         country_form = CountryForm()
         city_form = CityForm()
     context = {'part_form': part_form, 'phone_form': phone_form, 'email_form': email_form,
-               'address_form': address_form, 'country_form': country_form, 'city_form': city_form,
-               'employee_form': employee_form}
+               'country_form': country_form, 'city_form': city_form, 'employee_form': employee_form}
     return render(request, 'funsite/add_new_partner.html', context)
 
 
@@ -127,8 +126,8 @@ def mail_to_support(request):
             sender = mail_to_support_form.cleaned_data['sender']
             equipment_name = mail_to_support_form.cleaned_data['equipment_name']
             serial_number = mail_to_support_form.cleaned_data['serial_number']
-            message = 'Письмо было отправлено с сайта www.funtelecom.ru.\r\n От %s.\r\nАдрес для ответа: %s.\r\n'\
-                      'Наименование оборудования: %s.\r\nСерийный номер оборудования: %s.\r\nОписание проблемы:'\
+            message = 'Письмо было отправлено с сайта www.funtelecom.ru.\r\n От %s.\r\nАдрес для ответа: %s.\r\n' \
+                      'Наименование оборудования: %s.\r\nСерийный номер оборудования: %s.\r\nОписание проблемы:' \
                       % (sender, name, equipment_name, serial_number)
             message += mail_to_support_form.cleaned_data['message']
             recipients = ['dmitrochenko.vasiliy@gmail.com']

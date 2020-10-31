@@ -118,8 +118,18 @@ class Department(models.Model):
                                          verbose_name='Эл.почта подразделения')
     phone_department = models.ForeignKey('Phone', on_delete=models.CASCADE,
                                          verbose_name='Телефон подразделения')
-    department_address = models.ForeignKey('Address', on_delete=models.CASCADE,
-                                           verbose_name='Адрес подразделения')
+    department_country = models.ForeignKey('Country', on_delete=models.CASCADE, null=True, blank=True,
+                                           verbose_name='Страна подразделения')
+    department_city = models.ForeignKey('City', on_delete=models.CASCADE, null=True, blank=True,
+                                        verbose_name='Город подразделения')
+    department_street = models.ForeignKey('Street', on_delete=models.CASCADE, null=True, blank=True,
+                                          verbose_name='Улица')
+    department_number_house = models.ForeignKey('NumberHouse', on_delete=models.CASCADE, null=True, blank=True,
+                                                verbose_name='Номер дома')
+    department_number_office = models.ForeignKey('NumberOffice', on_delete=models.CASCADE, null=True, blank=True,
+                                                 verbose_name='Номер офиса')
+    department_access_map_link = models.ForeignKey('AccessMapLink', on_delete=models.CASCADE, null=True, blank=True,
+                                                   verbose_name='Ссылка на схему проезда')
     published_on_page = models.BooleanField(default=False, verbose_name='Опубликовано',
                                             help_text='Публиковать информацию о подразделении на странице?')
 
@@ -129,29 +139,6 @@ class Department(models.Model):
     class Meta:
         verbose_name = 'Подразделение'
         verbose_name_plural = 'Подразделения'
-
-
-class Address(models.Model):
-    """The model describes the address"""
-    title = models.CharField(max_length=50, blank=True, verbose_name='Описание адреса',
-                             help_text='Например, Адрес склада')
-    country = models.ForeignKey('Country', on_delete=models.CASCADE, verbose_name='Страна')
-    city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Населенный пункт')
-    street = models.ForeignKey('Street', on_delete=models.CASCADE, null=True, verbose_name='Улица')
-    number_house = models.PositiveSmallIntegerField(verbose_name='Номер дома', null=True, blank=True, validators=[
-        MaxValueValidator(1000), MinValueValidator(1)])
-    number_flat = models.PositiveSmallIntegerField(verbose_name='Номер помещения', blank=True, null=True, validators=[
-        MaxValueValidator(1000), MinValueValidator(1)])
-    number_office = models.PositiveSmallIntegerField(verbose_name='Номер офиса', blank=True, null=True, validators=[
-        MaxValueValidator(1000), MinValueValidator(1)])
-    access_map_link = models.CharField(max_length=255, verbose_name='Ссылка на схему проезда', null=True, blank=True)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Адрес'
-        verbose_name_plural = 'Адрес'
 
 
 class Country(models.Model):
@@ -194,6 +181,46 @@ class Street(models.Model):
         verbose_name_plural = 'Улицы'
 
 
+class NumberHouse(models.Model):
+    """The model describes the number house"""
+    number_house = models.CharField(max_length=6, verbose_name='Номер дома',
+                                    validators=[RegexValidator(regex=r'^[0-9/]+$')],
+                                    help_text='Если в списке нет номера дома, то внесите нажав на "+"')
+
+    def __str__(self):
+        return self.number_house
+
+    class Meta:
+        verbose_name = 'Номер дома'
+        verbose_name_plural = 'Номера домов'
+
+
+class NumberOffice(models.Model):
+    """The model describes the number office"""
+    number_office = models.CharField(max_length=6, verbose_name='Номер офиса',
+                                     validators=[RegexValidator(regex=r'^[0-9/]+$')],
+                                     help_text='Если в списке нет номера офиса, то внесите нажав на "+"')
+
+    def __str__(self):
+        return self.number_office
+
+    class Meta:
+        verbose_name = 'Номер офиса'
+        verbose_name_plural = 'Номера офисов'
+
+
+class AccessMapLink(models.Model):
+    """The model describes the link on the map"""
+    access_map_link = models.CharField(max_length=255, verbose_name='Ссылка на схему проезда')
+
+    def __str__(self):
+        return self.access_map_link
+
+    class Meta:
+        verbose_name = 'Ссылка на схему'
+        verbose_name_plural = 'Ссылки на схемы'
+
+
 class Email(models.Model):
     """The model stores contact information"""
     email = models.EmailField(max_length=150, verbose_name='email адрес')
@@ -227,8 +254,6 @@ class Partner(models.Model):
                                            help_text='Например, покупка товаров оптом.')
     position_partner_on_market = models.CharField(max_length=100, verbose_name='Позиция на рынке',
                                                   help_text='Например, "Интегратор"')
-    name_employee = models.ForeignKey('Employee', on_delete=models.CASCADE, null=True,
-                                      verbose_name='Сотрудник')
 
     def __str__(self):
         return self.name_partner_company
@@ -248,8 +273,12 @@ class Employee(models.Model):
                                           verbose_name='Должность сотрудника')
     email_employee = models.ForeignKey('Email', on_delete=models.CASCADE, verbose_name='Эл.почта сотрудника')
     phone_employee = models.ForeignKey('Phone', on_delete=models.CASCADE, verbose_name='Номер телефона сотрудника')
-    address_employee = models.ForeignKey('Address', on_delete=models.CASCADE, null=True,
-                                         verbose_name='Адрес сотрудника')
+    country_employee = models.ForeignKey('Country', on_delete=models.CASCADE, null=True,
+                                         verbose_name='Страна')
+    city_employee = models.ForeignKey('City', on_delete=models.CASCADE, null=True,
+                                      verbose_name='Город')
+    name_partner = models.ForeignKey('Partner', on_delete=models.CASCADE, null=True,
+                                     verbose_name='Компания партнер')
 
     def __str__(self):
         return self.last_name
