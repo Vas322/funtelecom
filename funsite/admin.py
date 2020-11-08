@@ -1,8 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.urls import reverse
+
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, \
-    City, Street, Phone, Partner, Email, Employee, EmployeePosition, MailToSupport
+    City, Street, Phone, Partner, Email, Employee, EmployeePosition, MailToSupport, NumberHouse, NumberOffice, \
+    AccessMapLink
+from django.utils.html import format_html, mark_safe
 
 
 @admin.register(Brand)
@@ -111,8 +115,9 @@ class PartnerAdmin(admin.ModelAdmin):
     model = Partner
 
     list_display = ('name_partner_company', 'position_partner_on_market', 'target_registration',)
+    fields = (('name_partner_company', 'position_partner_on_market', 'target_registration'),)
     search_fields = ['name_partner_company', 'position_partner_on_market', 'target_registration']
-    list_display_links = ('name_partner_company',)   
+    list_display_links = ('name_partner_company',)
 
     inlines = [
         EmployeeInline,
@@ -127,15 +132,61 @@ class EmployeeAdmin(admin.ModelAdmin):
     fields = (('last_name', 'first_name'), 'employee_position', ('country_employee', 'city_employee', 'email_employee',
                                                                  'phone_employee'), 'name_partner')
     list_display = ('last_name', 'first_name', 'employee_position', 'email_employee', 'phone_employee',
-                    'country_employee', 'city_employee', 'name_partner', 'get_position_partner_on_market')
+                    'country_employee', 'city_employee', 'partner_link', 'get_position_partner_on_market')
     search_fields = ['last_name', 'employee_position', 'email_employee', 'name_employee']
-    list_display_links = ('last_name', 'name_partner')
-    
+    list_display_links = ('last_name', 'partner_link')
+
     def get_position_partner_on_market(self, obj):
         employee_obj = obj.name_partner.position_partner_on_market
         return employee_obj
 
     get_position_partner_on_market.short_description = 'Позиция на рынке'
+
+    def partner_link(self, obj):
+        url = reverse('admin:funsite_partner_change', args=[obj.name_partner.id])
+        link = f'<a href="{url}">{obj.name_partner.name_partner_company}</a>'
+        return mark_safe(link)
+
+    partner_link.short_description = 'Имя партнера'
+
+
+@admin.register(NumberHouse)
+class NumberHouseAdmin(admin.ModelAdmin):
+    """Hiding information about an employee's position in the admin panel.
+        But EmployeePosition is available when add related models
+        """
+
+    """def get_model_perms(self, request):
+        
+        Return empty perms dict thus hiding the model from admin index.
+        
+        return {}"""
+
+
+@admin.register(NumberOffice)
+class NumberOfficeAdmin(admin.ModelAdmin):
+    """Hiding information about an employee's position in the admin panel.
+        But EmployeePosition is available when add related models
+        """
+
+    """def get_model_perms(self, request):
+
+        Return empty perms dict thus hiding the model from admin index.
+
+        return {}"""
+
+
+@admin.register(AccessMapLink)
+class AccessMapLinkAdmin(admin.ModelAdmin):
+    """Hiding information about an employee's position in the admin panel.
+        But EmployeePosition is available when add related models
+        """
+
+    """def get_model_perms(self, request):
+
+        Return empty perms dict thus hiding the model from admin index.
+
+        return {}"""
 
 
 @admin.register(EmployeePosition)
@@ -145,9 +196,9 @@ class EmployeePositionAdmin(admin.ModelAdmin):
         """
 
     """def get_model_perms(self, request):
-        
+
         Return empty perms dict thus hiding the model from admin index.
-        
+
         return {}"""
 
 

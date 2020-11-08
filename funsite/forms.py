@@ -23,7 +23,7 @@ class PhoneNumberForm(forms.ModelForm):
     """The form saves information about the phone in the database."""
     phone_number = forms.CharField(max_length=13, label='',
                                    widget=forms.TextInput(attrs={'placeholder': 'Введите номер телефона'}))
-    extension_number = forms.CharField(max_length=10, label='',
+    extension_number = forms.CharField(max_length=10, label='', required=False,
                                        widget=forms.TextInput(attrs={'placeholder': 'Введите ваш добавочный номер'}))
 
     class Meta:
