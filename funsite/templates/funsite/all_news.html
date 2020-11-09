@@ -21,7 +21,7 @@
 				<div class="media">
 					<img class="align-self-start mr-3 border-right"src=" {{ news.image_news.url }}">
 					<div class="media-body">
-						<div class="m-3">{{ news.text|truncatewords:30 }}</div>
+						<div class="m-3">{% autoescape off %}{{ news.text|truncatewords:30 }}{% endautoescape %}</div>
 					</div>
 				</div>
 				<div class="date">				

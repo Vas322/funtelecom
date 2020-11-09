@@ -1,8 +1,10 @@
+from django import forms
 from django.contrib import admin
 
 # Register your models here.
 from django.urls import reverse
 
+from funsite.forms import NewsAdminForm
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, \
     City, Street, Phone, Partner, Email, Employee, EmployeePosition, MailToSupport, NumberHouse, NumberOffice, \
     AccessMapLink
@@ -25,13 +27,14 @@ class BrandAdmin(admin.ModelAdmin):
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     """Displaying a News in the admin panel"""
-
+    form = NewsAdminForm
     fieldsets = [
         ('Введите оглавление новости', {'fields': ['title']}),
         ('Введите описание новости', {'fields': ['text'[:20]]}),
         ('Выберите изображение новости', {'fields': (('image_news', 'get_image'),)}),
+        ('Дата создания новости', {'fields': ['created_date']}),
     ]
-    readonly_fields = ('get_image',)
+    readonly_fields = ('get_image', 'created_date',)
     list_display = ('title', 'created_date', 'get_image')
 
     def get_image(self, obj):
@@ -48,11 +51,12 @@ class CarouselAdmin(admin.ModelAdmin):
         ('Выберите изображение карусели', {'fields': ['image_carousel']}),
         ('Ведите ссылку на новость или товар', {'fields': ['link']}),
         ('Установите приоритет', {'fields': ['index']}),
-        ('Дата создания новости', {'fields': ['created_date']}),
+        ('Дата создания баннера', {'fields': ['created_date']}),
     ]
     list_display = ('title', 'created_date', 'link', 'index')
     readonly_fields = ('created_date',)
     list_editable = ('index',)
+
 
 @admin.register(CompanyInfo)
 class CompanyInfoAdmin(admin.ModelAdmin):

@@ -1,6 +1,7 @@
 from django import forms
 
-from funsite.models import Partner, Employee, Phone, Email, Country, City, MailToSupport
+from funsite.models import Partner, Employee, Phone, Email, Country, City, MailToSupport, News
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class PartnerForm(forms.ModelForm):
@@ -84,3 +85,11 @@ class MailToSupportForm(forms.ModelForm):
     class Meta:
         model = MailToSupport
         fields = ['subject', 'name', 'sender', 'equipment_name', 'serial_number', 'message']
+
+
+class NewsAdminForm(forms.ModelForm):
+    text = forms.CharField(label="Текст новости", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = News
+        fields = ('title', 'text', 'image_news',)
