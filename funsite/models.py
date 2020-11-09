@@ -130,7 +130,7 @@ class Department(models.Model):
                                                  verbose_name='Номер офиса')
     department_access_map_link = models.ForeignKey('AccessMapLink', on_delete=models.CASCADE, null=True, blank=True,
                                                    verbose_name='Ссылка на схему проезда')
-    published_on_page = models.BooleanField(default=False, verbose_name='Опубликовано',
+    published_on_page = models.BooleanField(default=False, verbose_name='Опубликовано в контактах',
                                             help_text='Публиковать информацию о подразделении на странице?')
 
     def __str__(self):

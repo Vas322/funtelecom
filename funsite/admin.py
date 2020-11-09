@@ -12,24 +12,32 @@ from django.utils.html import format_html, mark_safe
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     """Displaying a brand in the admin panel"""
-    fieldsets = [
-        ('Введите название бренда', {'fields': ['name']}),
-        ('Введите ссылку на сайт', {'fields': ['link_site']}),
-        ('Введите описание бренда', {'fields': ['text'[:20]]}),
-        ('Выберите логотип бренда', {'fields': ['image_brand']}),
-    ]
-    list_display = ('name', 'link_site')
+
+    list_display = ('name', 'link_site', 'get_image')
+    readonly_fields = ('get_image',)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image_brand.url} width="80"')
+
+    get_image.short_description = "Изображение бренда"
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     """Displaying a News in the admin panel"""
+
     fieldsets = [
         ('Введите оглавление новости', {'fields': ['title']}),
         ('Введите описание новости', {'fields': ['text'[:20]]}),
-        ('Выберите изображение новости', {'fields': ['image_news']}),
+        ('Выберите изображение новости', {'fields': (('image_news', 'get_image'),)}),
     ]
-    list_display = ('title', 'created_date')
+    readonly_fields = ('get_image',)
+    list_display = ('title', 'created_date', 'get_image')
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image_news.url} width="120"')
+
+    get_image.short_description = "Изображение"
 
 
 @admin.register(Carousel)
@@ -40,14 +48,19 @@ class CarouselAdmin(admin.ModelAdmin):
         ('Выберите изображение карусели', {'fields': ['image_carousel']}),
         ('Ведите ссылку на новость или товар', {'fields': ['link']}),
         ('Установите приоритет', {'fields': ['index']}),
-
+        ('Дата создания новости', {'fields': ['created_date']}),
     ]
     list_display = ('title', 'created_date', 'link', 'index')
-
+    readonly_fields = ('created_date',)
+    list_editable = ('index',)
 
 @admin.register(CompanyInfo)
 class CompanyInfoAdmin(admin.ModelAdmin):
     """Displaying the info about company in the admin panel"""
+    fieldsets = [
+        ('Введите название компании', {'fields': ['title']}),
+        ('Введите описание компании', {'fields': ['description'[:20]]}),
+    ]
     list_display = ('title', 'description')
 
 
@@ -56,6 +69,7 @@ class DepartmentAdmin(admin.ModelAdmin):
     """Displaying the info about department in the admin panel"""
     list_display = ('name_department', 'phone_department', 'email_department', 'working_hours', 'published_on_page')
     list_display_links = ('name_department', 'phone_department', 'email_department')
+    list_editable = ('published_on_page',)
 
 
 @admin.register(Country)
@@ -135,6 +149,8 @@ class EmployeeAdmin(admin.ModelAdmin):
                     'country_employee', 'city_employee', 'partner_link', 'get_position_partner_on_market')
     search_fields = ['last_name', 'employee_position', 'email_employee', 'name_employee']
     list_display_links = ('last_name', 'partner_link')
+    list_filter = ('city_employee', 'name_partner')
+    save_on_top = True
 
     def get_position_partner_on_market(self, obj):
         employee_obj = obj.name_partner.position_partner_on_market
@@ -142,7 +158,7 @@ class EmployeeAdmin(admin.ModelAdmin):
 
     get_position_partner_on_market.short_description = 'Позиция на рынке'
 
-    def partner_link(self, obj):
+    def partner_link(self, obj: Employee):
         url = reverse('admin:funsite_partner_change', args=[obj.name_partner.id])
         link = f'<a href="{url}">{obj.name_partner.name_partner_company}</a>'
         return mark_safe(link)
@@ -206,3 +222,7 @@ class EmployeePositionAdmin(admin.ModelAdmin):
 class MailToSupportAdmin(admin.ModelAdmin):
     """Displaying a messages to support in the admin panel"""
     list_display = ('subject', 'name', 'equipment_name', 'serial_number', 'sender', 'message')
+
+
+admin.site.site_title = "Админка ФАН Телекома"
+admin.site.site_header = "Админка ФАН Телекома"
