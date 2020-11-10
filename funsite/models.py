@@ -32,7 +32,6 @@ class Brand(models.Model):
             img.save(self.image_brand.path)
 
     class Meta:
-        """Attribute allows you to use the plural form of 'Brands'"""
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
 
@@ -60,7 +59,6 @@ class News(models.Model):
             img.save(self.image_news.path)
 
     class Meta:
-        """Attribute allows you to use the plural form of 'News'"""
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
 
@@ -90,7 +88,6 @@ class Carousel(models.Model):
             img.save(self.image_carousel.path)
 
     class Meta:
-        """Attribute allows you to use the plural form of 'carousels'"""
         verbose_name = 'Карусель'
         verbose_name_plural = 'Карусель'
 

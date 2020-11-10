@@ -15,7 +15,7 @@
 		<h2>{{ my_company_info.title }}</h2>
 	</div>
 	<div class="description-company">
-		{{my_company_info.description}}
+		{% autoescape off %}{{my_company_info.description}}{% endautoescape %}
 	</div>	
 </div>
 {% endblock content %}

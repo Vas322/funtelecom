@@ -1,6 +1,6 @@
 from django import forms
 
-from funsite.models import Partner, Employee, Phone, Email, Country, City, MailToSupport, News
+from funsite.models import Partner, Employee, Phone, Email, Country, City, MailToSupport, News, Brand, CompanyInfo
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -88,8 +88,27 @@ class MailToSupportForm(forms.ModelForm):
 
 
 class NewsAdminForm(forms.ModelForm):
+    """The form use CKEditor for edit text field"""
     text = forms.CharField(label="Текст новости", widget=CKEditorUploadingWidget())
 
     class Meta:
         model = News
         fields = ('title', 'text', 'image_news',)
+
+
+class BrandAdminForm(forms.ModelForm):
+    """The form use CKEditor for edit text field"""
+    text = forms.CharField(label="Описание бренда", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Brand
+        fields = ('name', 'text', 'image_brand', 'link_site')
+
+
+class CompanyInfoAdminForm(forms.ModelForm):
+    """The form use CKEditor for edit description field"""
+    description = forms.CharField(label="Описание компании", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = CompanyInfo
+        fields = ('title', 'description')

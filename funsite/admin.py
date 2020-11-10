@@ -4,7 +4,7 @@ from django.contrib import admin
 # Register your models here.
 from django.urls import reverse
 
-from funsite.forms import NewsAdminForm
+from funsite.forms import NewsAdminForm, BrandAdminForm, CompanyInfoAdminForm
 from funsite.models import Brand, News, Carousel, CompanyInfo, Department, Country, \
     City, Street, Phone, Partner, Email, Employee, EmployeePosition, MailToSupport, NumberHouse, NumberOffice, \
     AccessMapLink
@@ -14,7 +14,7 @@ from django.utils.html import format_html, mark_safe
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     """Displaying a brand in the admin panel"""
-
+    form = BrandAdminForm
     list_display = ('name', 'link_site', 'get_image')
     readonly_fields = ('get_image',)
 
@@ -61,6 +61,7 @@ class CarouselAdmin(admin.ModelAdmin):
 @admin.register(CompanyInfo)
 class CompanyInfoAdmin(admin.ModelAdmin):
     """Displaying the info about company in the admin panel"""
+    form = CompanyInfoAdminForm
     fieldsets = [
         ('Введите название компании', {'fields': ['title']}),
         ('Введите описание компании', {'fields': ['description'[:20]]}),
