@@ -81,33 +81,27 @@ class DepartmentAdmin(admin.ModelAdmin):
 class CountryAdmin(admin.ModelAdmin):
     """Displaying the info about country in the admin panel"""
 
-    """def get_model_perms(self, request):
-        
-        Return empty perms dict thus hiding the model from admin index.
-        
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     """Displaying the info about city in the admin panel"""
 
-    """def get_model_perms(self, request):
-        
-        Return empty perms dict thus hiding the model from admin index.
-        
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(Street)
 class StreetAdmin(admin.ModelAdmin):
     """Displaying the info about street in the admin panel"""
 
-    """def get_model_perms(self, request):
-        
-        Return empty perms dict thus hiding the model from admin index.
-        
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(Email)
@@ -116,11 +110,20 @@ class EmailAdmin(admin.ModelAdmin):
     Hiding an email in the admin panel.But email is available when add related models
     """
 
-    """def get_model_perms(self, request):
-        
-        Return empty perms dict thus hiding the model from admin index.
-        
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
+
+
+@admin.register(Phone)
+class PhoneAdmin(admin.ModelAdmin):
+    """
+    Hiding a phone number in the admin panel.But email is available when add related models
+    """
+
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 class EmployeeInline(admin.TabularInline):
@@ -173,41 +176,35 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(NumberHouse)
 class NumberHouseAdmin(admin.ModelAdmin):
-    """Hiding information about an employee's position in the admin panel.
-        But EmployeePosition is available when add related models
+    """Hiding information about a number house in the admin panel.
+        But NumberHouse is available when add related models
         """
 
-    """def get_model_perms(self, request):
-        
-        Return empty perms dict thus hiding the model from admin index.
-        
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(NumberOffice)
 class NumberOfficeAdmin(admin.ModelAdmin):
-    """Hiding information about an employee's position in the admin panel.
-        But EmployeePosition is available when add related models
+    """Hiding information about an number office in the admin panel.
+        But NumberOffice is available when add related models
         """
 
-    """def get_model_perms(self, request):
-
-        Return empty perms dict thus hiding the model from admin index.
-
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(AccessMapLink)
 class AccessMapLinkAdmin(admin.ModelAdmin):
-    """Hiding information about an employee's position in the admin panel.
-        But EmployeePosition is available when add related models
+    """Hiding information about an access map link in the admin panel.
+        But AccessMapLink is available when add related models
         """
 
-    """def get_model_perms(self, request):
-
-        Return empty perms dict thus hiding the model from admin index.
-
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(EmployeePosition)
@@ -216,11 +213,9 @@ class EmployeePositionAdmin(admin.ModelAdmin):
         But EmployeePosition is available when add related models
         """
 
-    """def get_model_perms(self, request):
-
-        Return empty perms dict thus hiding the model from admin index.
-
-        return {}"""
+    def get_model_perms(self, request):
+        """Return empty perms dict thus hiding the model from admin index."""
+        return {}
 
 
 @admin.register(MailToSupport)
